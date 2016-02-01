@@ -128,8 +128,8 @@ function cargoDetalle(idPlaya){
 
         //cambioPantalla($('#_info'));
 
-        $('#busqueda .contenido').empty();
-        $('#busqueda .contenido').css('overflow-y','scroll');
+        $('#infoPlayas .contenido').empty();
+        $('#infoPlayas .contenido').css('overflow-y','scroll');
         if(response!=null && response!='' && response!='[]'){ 
           $.each(response,function(key,value){ 
             id_playa = value.id_playa;
@@ -147,12 +147,12 @@ function cargoDetalle(idPlaya){
             descripcion = value.descripcion;
             foto = value.foto;
 
-            $('#_info .resultado > div').empty();
-            $('#_info .informacion-lugar').empty();
+            $('#infoPlayas .resultado > div').empty();
+            $('#infoPlayas .informacion-lugar').empty();
 
-            $('#_info .resultado > div').append(nombre);
-            $('#_info .contenido').append('<div id="goMapa" onclick="cargoMapa('+mapa+')">VER MAPA</div>');
-            $('#_info .informacion-lugar').append(descripcion);
+            $('#infoPlayas .resultado > div').append(nombre);
+            $('#infoPlayas .contenido').append('<div id="goMapa" onclick="cargoMapa('+mapa+')">VER MAPA</div>');
+            $('#infoPlayas .informacion-lugar').append(descripcion);
 
             cargoActividades(id_playa);
             cargoServicios(id_playa);
