@@ -6,8 +6,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>_app PLAYAS_</title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="dist/css/framework7.material.min.css">
+    
+    <!-- IOS -->
+    <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
+    
+    <!-- ANDROID 
+    <link rel="stylesheet" href="dist/css/framework7.material.min.css">-->
+    
     <!-- Path to your custom app styles-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/my-app.css">
@@ -36,13 +41,20 @@
                           <div class="item-title">Busqueda</div>
                         </div>
                       </div></a></li>
-                  <li><a href="#form" class="item-link">
+                  <!--<li><a href="#form" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">Info</div>
                         </div>
                       </div></a></li>
-                  <li><a href="#form" class="item-link">
+                  -->
+                  <li><a href="#misplayas" class="item-link">
+                      <div class="item-content"> 
+                        <div class="item-inner">
+                          <div class="item-title">Mis Playas</div>
+                        </div>
+                      </div></a></li>
+                  <li><a href="#mapa" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">Mapa</div>
@@ -100,6 +112,16 @@
           <div data-page="form" class="navbar-inner cached">
             <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
             <div class="center sliding">Form</div>
+          </div>
+          <!-- Navbar inner for Form page-->
+          <div data-page="misplayas" class="navbar-inner cached">
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+            <div class="center sliding">MIS PLAYAS</div>
+          </div>
+          <!-- Navbar inner for Form page-->
+          <div data-page="mapa" class="navbar-inner cached">
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+            <div class="center sliding">MAPA</div>
           </div>
         </div>
         <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -418,7 +440,7 @@
                   <div class="contenido">
                     <article>
                       <figure>
-                        <img src="img/playa.jpg" />
+                        <img src="img/comodin.png" />
                       </figure>
                       <div class="rated">
                         <span>25</span>
@@ -444,9 +466,53 @@
               </div>
             </div>
           </div>
+          <!--
+          |================================================================================|
+          | MIS PLAYAS                               
+          |================================================================================|
+          -->
+          <div id="misplayas" data-page="misplayas" class="page cached">
+            <div class="page-content">
+              <div class="content-block">
+                <div class="resultado"><div>MIS PLAYAS</div></div>
+                
+                <div class="row contenido">
+                  
+                  
+
+                </div>
+              
+              </div>
+            </div>
+          </div> 
+
+          <!--
+          |================================================================================|
+          | MAPAS                             
+          |================================================================================|
+          -->
+          <div data-page="mapa" class="page cached">
+            <div class="page-content">
+              <div class="content-block">
+                <div class="resultado"><div>MAPAS</div></div>
+                
+                <div class="row contenido">
+                  
+                  <div id="map"></div>
+
+                </div>
+              
+              </div>
+            </div>
+          </div>  
           
-       
           
+
+
+   
+
+
+
         </div>
 
       </div>
@@ -457,5 +523,6 @@
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/_index.js"></script>
+    
   </body>
 </html>
