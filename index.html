@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c"></script>
+
     <title>_app PLAYAS_</title>
-    
-    <!-- IOS -->
-    <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
-    
-    <!-- ANDROID 
-    <link rel="stylesheet" href="dist/css/framework7.material.min.css">-->
     
     <!-- Path to your custom app styles-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/my-app.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
   </head>
   <body>
     <!-- Status bar overlay for fullscreen mode-->
@@ -35,26 +32,19 @@
                           <div class="item-title">Registro</div>
                         </div>
                       </div></a></li>
-                  <li><a href="#busqueda" class="item-link">
+                  <li><a href="#busqueda" class="item-link close-panel">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">Busqueda</div>
                         </div>
                       </div></a></li>
-                  <!--<li><a href="#form" class="item-link">
-                      <div class="item-content"> 
-                        <div class="item-inner">
-                          <div class="item-title">Info</div>
-                        </div>
-                      </div></a></li>
-                  -->
-                  <li><a href="#misplayas" class="item-link">
+                  <li><a href="#misplayas" class="item-link close-panel">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">Mis Playas</div>
                         </div>
                       </div></a></li>
-                  <li><a href="#mapa" class="item-link">
+                  <li><a href="#mapa" class="item-link close-panel">
                       <div class="item-content"> 
                         <div class="item-inner">
                           <div class="item-title">Mapa</div>
@@ -64,12 +54,7 @@
               </div>
       </div>
     </div>
-    <!-- Right panel with cover effect
-    <div class="panel panel-right panel-cover">
-      <div class="content-block">
-        <p>Right panel content goes here</p>
-      </div>
-    </div>-->
+
     <!-- Views-->
     <div class="views">
       <!-- Your main view, should have "view-main" class-->
@@ -82,46 +67,55 @@
           </div>
 
           <!-- Navbar inner for Index page-->
-          <div data-page="playas" class="navbar-inner cached">
+          <div id="home" data-page="playas" class="navbar-inner cached">
             <div class="left">
-              <a href="#" data-panel="left" class="open-panel"><i class="icon icon-bars"></i></a>
+              <a href="#" data-panel="left" class="open-panel"><i class="icon fa fa-bars"></i></a>
             </div>
-            <div class="center"><p>593 - BEACH</p></div>
+            <div class="center"><p><img src="img/logo.png" /></p></div>
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
           </div>
 
           <!-- Navbar inner for About page-->
-          <div data-page="busqueda" class="navbar-inner cached">
-            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
-            <div class="center sliding">INFO - PLAYAS</div>
+          <div id="pageBusqueda" data-page="busqueda" class="navbar-inner cached">
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
+            <div class="center sliding"><p><img src="img/logo.png" /></p></div>
           </div>
 
           <!-- Navbar inner for About page-->
           <div data-page="infoPlayas" class="navbar-inner cached">
-            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
-            <div class="center sliding">INFO - PLAYAS</div>
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
+            <div class="center sliding"><p><img src="img/logo.png" /></div>
+            <div class="right">
+                <a href="#busqueda" ><i class="fa fa-search"></i></a>
+            </div>
           </div>
           <!-- Navbar inner for Services page-->
           <div data-page="services" class="navbar-inner cached">
-            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
             <div class="center sliding">Services</div>
           </div>
           <!-- Navbar inner for Form page-->
           <div data-page="form" class="navbar-inner cached">
-            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
             <div class="center sliding">Form</div>
           </div>
           <!-- Navbar inner for Form page-->
           <div data-page="misplayas" class="navbar-inner cached">
-            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
-            <div class="center sliding">MIS PLAYAS</div>
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
+            <div class="center sliding"><p><img src="img/logo.png" /></p></div>
+            <div class="right">
+                <a href="#busqueda" ><i class="fa fa-search"></i></a>
+            </div>
           </div>
           <!-- Navbar inner for Form page-->
           <div data-page="mapa" class="navbar-inner cached">
-            <div class="left sliding"><a href="#" class="back link"> <i class="icon icon-back"></i><span>Back</span></a></div>
-            <div class="center sliding">MAPA</div>
+            <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
+            <div class="center sliding"><p><img src="img/logo.png" /></p></div>
+            <div class="right">
+                <a href="#busqueda" ><i class="fa fa-search"></i></a>
+            </div>
           </div>
         </div>
         <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
@@ -369,7 +363,7 @@
           <div id="playas" data-page="playas" class="page cached">
             <div class="page-content">
               <div class="content-block">
-                <div class="resultado"><div>RESULTADOS DE PLAYAS</div></div>
+                <div class="resultado"><div> RESULTADOS DE PLAYAS </div></div>
                 
                 <div class="contenido">
                   
@@ -385,31 +379,11 @@
           | INFO                               
           |================================================================================|
           -->
-          <!--<div id="busqueda" data-page="busqueda" class="page cached">
-            
-            <form class="searchbar">
-                <div class="searchbar-input">
-                    <input type="search" placeholder="Search">
-                    <a href="#" class="searchbar-clear"></a>
-                </div>
-                <a href="#" class="searchbar-cancel">Cancel</a>
-            </form>
-            
-            <div class="searchbar-overlay"></div>
-            <div class="page-content">
-              <div class="content-block">
-                <div class="resultado"><div>RESULTADOS DE PLAYAS</div></div>
-                <div class="contenido"></div>
-              </div>
-            </div>
-
-          </div>-->
-
           <div id="busqueda" data-page="busqueda"  class="page cached">
             <!-- Search Bar -->
             <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
               <div class="searchbar-input">
-                <input type="search" placeholder="Search"><a href="#" class="searchbar-clear"></a>
+                <input type="search" placeholder="Buscar"><a href="#" class="searchbar-clear"></a>
               </div><a href="#" class="searchbar-cancel">Cancel</a>
             </form>
            
@@ -419,7 +393,7 @@
             <div class="page-content">
               <!-- This block will be displayed if nothing found -->
               <div class="content-block searchbar-not-found">
-                <div class="content-block-inner">Nothing found</div>
+                <div class="content-block-inner">No encontrado</div>
               </div>
            
               <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
@@ -443,7 +417,6 @@
                         <img src="img/comodin.png" />
                       </figure>
                       <div class="rated">
-                        <span>25</span>
                         <div class="stars"><i class="fa fa-star"></i></div>
                       </div>
 
@@ -494,11 +467,45 @@
           <div data-page="mapa" class="page cached">
             <div class="page-content">
               <div class="content-block">
-                <div class="resultado"><div>MAPAS</div></div>
+                <!--<div class="resultado"><div>MAPAS</div></div>-->
                 
                 <div class="row contenido">
-                  
-                  <div id="map"></div>
+                    <script type="text/javascript">
+                    //<![CDATA[  
+                    google.load('maps', '2', {callback:simple});
+                    var map;
+                    function simple(){  
+                      if (GBrowserIsCompatible()) { 
+                      var map = new GMap2(document.getElementById("map1"));
+map.setCenter(
+                        new GLatLng(-2.162024, -79.906211), 8);
+                      }
+                      var point;
+                      var x;
+                      var locations = new Array();
+                      locations[0] = [-2.176311, -79.895119];
+                      locations[1] = [-2.134669, -79.898168];
+
+                              for (x in locations) {
+                                  point = new GLatLng(locations[x]);
+                                  map.addOverlay(new GMarker(point));
+                              }
+                    
+
+                      //var marker = createMarker(point,'La Universidad de la Habana')
+                      //map.addOverlay(marker);
+                      
+                    }
+                    function createMarker(point,html) {
+                      var marker = new GMarker(point);
+                      GEvent.addListener(marker, "click", function() {
+                      marker.openInfoWindowHtml(html);});
+                      return marker;
+                    }  
+                    window.onload=function(){simple();}
+                    //]]>
+                    </script>
+                    <div id="map1" style="width:650px;height:240px;border:2px solid blue;"></div>
 
                 </div>
               
