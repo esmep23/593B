@@ -5,25 +5,30 @@ var _servicios = new Array();
 var _detallePlaya = new Array();
 var favoritos;
 var map;
+var onSearch = false; //toggle
+var value = localStorage.getItem('token');
 
 
 $( document ).ready(function() {
    
   //sizeWindows();
-
-
-
+   
   if (localStorage.getItem("favoritos") === null) {
     localStorage.setItem( 'favoritos', "0" );
   }
 
 
   myApp.onPageInit('playas', function (page) {
-    playasOFFLine();
-    cargoFavoritos();
-    misPlayas();
 
-    $('div.navbar').css('display','block');
+    console.log('-1-');
+    setTimeout(function(){ 
+      playasOFFLine();
+      cargoFavoritos();
+      misPlayas();
+
+      $('div.navbar').css('display','block');
+    }, 200);
+
   });
 
 
@@ -34,30 +39,40 @@ $( document ).ready(function() {
     //console.log('Online');
     getPlayas();
     cargoActividades();
-
-      
-    
   } else {
     // alert('Offline');
-
     
-
+    playasOFFLine();
+    cargoFavoritos();
+    misPlayas();
+    $('div.navbar').css('display','block');
   }
 
 
 
-$( "playa-"+argument+' .rateStar .favoriteStar i' ).toggle(
-    function() {
-      alert(0);
-      //$( this ).addClass( "activo" );
-    }, function() {
-      alert(1);
-      //$( this ).removeClass( "activo" );
-    }
-  );
 
 
+  if(value){
+    //alert('TENGO');    
+     mainView.router.load({pageName: 'playas', animatePages: false});
+  }else{
+    //alert('NO TENGO');  
+     mainView.router.load({pageName: 'registro', animatePages: false});
+  }
+
+ 
 }); // document ready
+
+  function toggle_visibility_search(argument) {
+      onRate = !onRate;
+      //alert(onRate);
+      if(onRate){
+          
+      }else{
+         
+      } 
+  }
+
 
   function sizeWindows(){
     $('#busqueda .contenido').css('height', screen.height-(screen.height/1.8));
@@ -233,7 +248,7 @@ function playasOFFLine(){
       for ( playa in _playas) {
          //console.log( _playas[playa].nombre );
         
-        $('#busqueda .list-block ul').append('<li class="item-content" onclick="cargoDetalle('+_playas[playa].id_playa+');"><div class="item-inner"><div class="item-title">'+_playas[playa].nombre+'</div></div></li>');
+        $('#busqueda .list-block ul').append('<li class="item-content" onclick="cargoDetalle('+_playas[playa].id_playa+');"><div class="item-inner"><div class="item-title">'+_playas[playa].slug+'</div></div></li>');
         $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="rate('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
         
 
@@ -261,13 +276,13 @@ function playasOFFLine(){
       
         //default iconos.
 
-          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa fa-hospital"></i></div>');
-          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa fa-chiringo"></i></div>');
-          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa fa-tiendas"></i></div>');
+          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa icon-hospital"></i></div>');
+          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa icon-chiringo"></i></div>');
+          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa icon-tiendas"></i></div>');
           console.log(_playas[playa].id_playa);
-          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa fa-windsurf"></i></div>');
-          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa fa-aves"></i></div>');
-          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa fa-cabalgatas"></i></div>');
+          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa icon-Kitesurf"></i></div>');
+          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa icon-avistamiento-aves"></i></div>');
+          $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa icon-cabalgatas"></i></div>');
           
 
         } 
@@ -330,6 +345,57 @@ function cargoDetalle(argument){
 
 
 }
+
+function guardoDatos(){
+  nick = $('#nick').val();
+  email = $('#email').val();
+  pais = $('#pais').val();
+  anio = $('#anio').val();
+  
+  var datos ={
+      'nick': nick,
+      'email': email,
+      'pais': pais,
+      'anio': anio
+    }
+    $.ajax({
+      url: direccion+'actions/guardoRegistro.php',
+      type: "POST",
+      cache: true,
+      dataType: "json",
+      data: datos,
+      success: function(response){  
+        //alert(response); 
+        mainView.router.load({pageName: 'playas', animatePages: false}, function(){
+          //alert(1);
+        });
+    
+        var obj = response;
+        
+        localStorage.setItem('token', obj);
+      },
+      error : function(error){     
+          //alert(error);
+      }
+
+    }); 
+}
+
+ function displayAsImage3(file, containerid) {
+    if (typeof FileReader !== "undefined") {
+      var container = document.getElementById(containerid),
+          img = document.createElement("img"),
+          reader;
+      container.appendChild(img);
+      reader = new FileReader();
+      reader.onload = (function (theImg) {
+        return function (evt) {
+          theImg.src = evt.target.result;
+        };
+      }(img));
+      reader.readAsDataURL(file);
+    }
+  }
 
 function cargoMapa(argument){
 
