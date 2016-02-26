@@ -192,8 +192,9 @@
                     <input name="nick" id="nick" type="text" placeholder="Nick">
                     <input name="email" id="email" type="text" placeholder="Email">
                 </div>
-
-                <input class="submit" type="submit" value="Submit">
+                <div class="row no-gutter">
+                  <input class="submit" type="submit" value="Enviar">
+                </div>
               </form>
               <script type="text/javascript">
                 $( document ).ready(function() {
@@ -340,13 +341,13 @@
           | MAPAS                             
           |================================================================================|
           -->
-          <div data-page="mapa" class="page cached">
+          <div id="mapa" data-page="mapa" class="page cached">
             <div class="page-content">
               <div class="content-block">
                 <!--<div class="resultado"><div>MAPAS</div></div>-->
                 
                 <div class="row contenido">
-                    <script type="text/javascript">
+                    <!--<script type="text/javascript">
                     //<![CDATA[  
                     google.load('maps', '2', {callback:simple});
                     var map;
@@ -382,7 +383,7 @@ map.setCenter(
                     //]]>
                     </script>
                     <div id="map1" style="width:650px;height:240px;border:2px solid blue;"></div>
-
+                    -->
                 </div>
               
               </div>

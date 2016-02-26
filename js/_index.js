@@ -306,7 +306,7 @@ function cargoDetalle(argument){
         $('#infoPlayas .rated .stars i').removeClass('activo');
         
         $('#infoPlayas .resultado > div').append('<h3>'+_playas[playa].nombre+'</h3>');
-        $('#infoPlayas .contenido').append('<div id="goMapa" onclick="cargoMapa('+_playas[playa].id_playa+')"><span class="fa fa-map-marker fa-4x"></span></div>');
+        $('#infoPlayas .contenido').append('<div id="goMapa" onclick="cargoMapa('+_playas[playa].mapa+')"><span class="fa fa-map-marker fa-4x"></span></div>');
         $('#infoPlayas .informacion-lugar').append(_playas[playa].descripcion);
 
         var oldItems = localStorage.getItem('favoritos');
@@ -366,9 +366,7 @@ function guardoDatos(){
       data: datos,
       success: function(response){  
         //alert(response); 
-        mainView.router.load({pageName: 'playas', animatePages: false}, function(){
-          //alert(1);
-        });
+        mainView.router.load({pageName: 'playas', animatePages: false});
     
         var obj = response;
         
@@ -397,9 +395,14 @@ function guardoDatos(){
     }
   }
 
-function cargoMapa(argument){
-
+function cargoMapa(argument1, argument2){
+  //alert(argument1 +' - '+argument2);
+  console.log(argument1+ '-' +argument2);
+  mainView.router.load({pageName: 'mapa'});
+  $('#mapa .contenido').empty();
+  $('#mapa .contenido').append('<iframe src = "https://maps.google.com/maps?q='+argument1+','+argument2+'&hl=es;z=8&amp;output=embed" style="height: 500px; border: 0"></iframe>');
 }
+
 
 function misPlayas(){
   console.log('misPlayas');
