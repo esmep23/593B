@@ -32,7 +32,7 @@ $( document ).ready(function() {
   });
 
 
-  getMobileOperatingSystem();
+  //getMobileOperatingSystem();
  
  
   if(navigator.onLine){
