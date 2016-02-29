@@ -8,7 +8,6 @@ var map;
 var onSearch = false; //toggle
 var value = localStorage.getItem('token');
 
-
 $( document ).ready(function() {
    
   //sizeWindows();
@@ -20,32 +19,31 @@ $( document ).ready(function() {
 
   myApp.onPageInit('playas', function (page) {
 
-    console.log('-1-');
+    
     setTimeout(function(){ 
+      console.log('-1-');
       playasOFFLine();
       cargoFavoritos();
       misPlayas();
 
       $('div.navbar').css('display','block');
-    }, 200);
+    }, 1000);
 
   });
 
+  myApp.onPageInit('registro', function (page) {
+    $('div.navbar').css('display','none');
+  });
 
   //getMobileOperatingSystem();
  
  
   if(navigator.onLine){
+
     //console.log('Online');
     getPlayas();
     cargoActividades();
-  } else {
-    // alert('Offline');
     
-    playasOFFLine();
-    cargoFavoritos();
-    misPlayas();
-    $('div.navbar').css('display','block');
   }
 
 
@@ -75,7 +73,7 @@ $( document ).ready(function() {
 
 
   function sizeWindows(){
-    $('#busqueda .contenido').css('height', screen.height-(screen.height/1.8));
+    // $('#busqueda .contenido').css('height', screen.height-(screen.height/1.8));
   }
 
   /* detect */
@@ -249,7 +247,13 @@ function playasOFFLine(){
          //console.log( _playas[playa].nombre );
         
         $('#busqueda .list-block ul').append('<li class="item-content" onclick="cargoDetalle('+_playas[playa].id_playa+');"><div class="item-inner"><div class="item-title">'+_playas[playa].slug+'</div></div></li>');
-        $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="rate('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
+        
+        if(_playas[playa].foto){
+           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="'+_playas[playa].foto+'" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="rate('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
+        }else{
+           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="rate('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
+        }
+
         
 
         for ( actividad in _actividades) {
@@ -312,6 +316,13 @@ function cargoDetalle(argument){
         var oldItems = localStorage.getItem('favoritos');
         var presto = oldItems.indexOf(argument);
         console.log('pruebaaaaaaaaaaaaaa'+presto);
+
+        $('#infoPlayas .contenido article figure').empty();
+        if(_playas[playa].foto){
+            $('#infoPlayas .contenido article figure').append('<img src="'+_playas[playa].foto+'" />');
+        }else{
+            $('#infoPlayas .contenido article figure').append('<img src="img/comodin.png" />');
+        }
         if (presto == -1){
           //oldItems.push(argument);
           $('#infoPlayas .rated .stars i').removeClass('activo');
@@ -340,6 +351,19 @@ function cargoDetalle(argument){
                     
                 }
 
+
+                        //default iconos.
+
+          $('#infoPlayas .contenido .mActividades').append('<div class="item item-actividades"><i class="fa icon-hospital"></i></div>');
+          $('#infoPlayas .contenido .mActividades').append('<div class="item item-actividades"><i class="fa icon-chiringo"></i></div>');
+          $('#infoPlayas .contenido .mActividades').append('<div class="item item-actividades"><i class="fa icon-tiendas"></i></div>');
+          console.log(_playas[playa].id_playa);
+          $('#infoPlayas .contenido .mServicios').append('<div class="item item-actividades"><i class="fa icon-Kitesurf"></i></div>');
+          $('#infoPlayas .contenido .mServicios').append('<div class="item item-actividades"><i class="fa icon-avistamiento-aves"></i></div>');
+          $('#infoPlayas .contenido .mServicios').append('<div class="item item-actividades"><i class="fa icon-cabalgatas"></i></div>');
+          
+
+
       }
     } 
 
@@ -356,7 +380,8 @@ function guardoDatos(){
       'nick': nick,
       'email': email,
       'pais': pais,
-      'anio': anio
+      'anio': anio,
+      'foto': localStorage.getItem( '_imagenPerfil')
     }
     $.ajax({
       url: direccion+'actions/guardoRegistro.php',
@@ -379,21 +404,64 @@ function guardoDatos(){
     }); 
 }
 
+/*********************************************************************************************/
+/*********************************************************************************************/
+
+    $("#chooseFile").click(function(e){
+      e.preventDefault();
+      $("input[type=file]").trigger("click");
+    });
+
+    $("input[type=file]").change(function(){
+      var file = $("input[type=file]")[0].files[0];            
+      $("#preview").empty();
+      $("button#chooseFile").css('display','none');
+      $(".takePick #info").css('display','none');
+      displayAsImage3(file, "preview");
+      
+      /*$info = $(".takePick #info");
+      $info.empty();
+      if (file && file.name) {
+        $info.append("<li>name:<span>" + file.name + "</span></li>");
+      }
+      if (file && file.type) {
+        $info.append("<li>size:<span>" + file.type + " bytes</span></li>");
+      }
+      if (file && file.size) {
+        $info.append("<li>size:<span>" + file.size + " bytes</span></li>");
+      }
+      if (file && file.lastModifiedDate) {
+        $info.append("<li>lastModifiedDate:<span>" + file.lastModifiedDate + " bytes</span></li>");
+      }
+      $info.listview("refresh");*/
+    });
+
  function displayAsImage3(file, containerid) {
     if (typeof FileReader !== "undefined") {
       var container = document.getElementById(containerid),
           img = document.createElement("img"),
           reader;
       container.appendChild(img);
+
       reader = new FileReader();
       reader.onload = (function (theImg) {
         return function (evt) {
           theImg.src = evt.target.result;
+          localStorage.setItem("_imagenPerfil", evt.target.result);
+          console.log(evt.target.result);
         };
       }(img));
       reader.readAsDataURL(file);
     }
   }
+
+
+// Usage
+
+
+/*********************************************************************************************/
+/*********************************************************************************************/
+
 
 function cargoMapa(argument1, argument2){
   //alert(argument1 +' - '+argument2);

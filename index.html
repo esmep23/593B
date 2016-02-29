@@ -21,6 +21,11 @@
 
   </head>
   <body>
+
+  <div id="map_canvas"
+    style="position:absolute;top:30px;bottom:50px;left:0;right:0;"></div>
+
+    
     <!-- Status bar overlay for fullscreen mode-->
     <div class="statusbar-overlay"></div>
     <!-- Panels overlay-->
@@ -152,6 +157,7 @@
                     <div data-role="content">
                       <div class="hiddenfile" style="display:none">
                         <input type="file"  data-clear-btn="false" name="image" id="image" accept="image/*" capture>
+                        <canvas></canvas>
                       </div>
                     </div>
                     <div class="takePick">
@@ -210,9 +216,9 @@
                               }
                             },
                             messages: {
-                              nick: "Ingrese su nombre",
-                              pais: "required",
-                              anio: "required",
+                              nick: "Ingrese su nick name",
+                              pais: "Ingrese su Pais",
+                              anio: "Ingrese el año",
                               email: {
                                 required: "Necesitamos un email valido",
                                 email: "Su email debe tener formato valido name@domain.com"
