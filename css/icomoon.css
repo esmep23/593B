@@ -24,6 +24,90 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-gallera:before {
+    content: "\e91a";
+}
+.icon-guia:before {
+    content: "\e91b";
+}
+.icon-banco:before {
+    content: "\e91c";
+}
+.icon-mall:before {
+    content: "\e91d";
+}
+.icon-comida:before {
+    content: "\e91e";
+}
+.icon-pet:before {
+    content: "\e91f";
+}
+.icon-sombrero:before {
+    content: "\e920";
+}
+.icon-pan:before {
+    content: "\e921";
+}
+.icon-aladelta:before {
+    content: "\e922";
+}
+.icon-cajero:before {
+    content: "\e923";
+}
+.icon-iglesia:before {
+    content: "\e924";
+}
+.icon-campamento:before {
+    content: "\e925";
+}
+.icon-fogata:before {
+    content: "\e926";
+}
+.icon-snorkel:before {
+    content: "\e927";
+}
+.icon-parqueo:before {
+    content: "\e928";
+}
+.icon-cuidador:before {
+    content: "\e929";
+}
+.icon-disco:before {
+    content: "\e92a";
+}
+.icon-chef:before {
+    content: "\e92b";
+}
+.icon-cine:before {
+    content: "\e92c";
+}
+.icon-faro:before {
+    content: "\e92d";
+}
+.icon-silhouette2:before {
+    content: "\e92e";
+}
+.icon-cancha:before {
+    content: "\e92f";
+}
+.icon-kayac:before {
+    content: "\e930";
+}
+.icon-yoga:before {
+    content: "\e931";
+}
+.icon-karaoke:before {
+    content: "\e932";
+}
+.icon-buque:before {
+    content: "\e933";
+}
+.icon-jetski:before {
+    content: "\e934";
+}
+.icon-starting:before {
+    content: "\e935";
+}
 .icon-wifi:before {
     content: "\e917";
 }
@@ -102,4 +186,5 @@
 .icon-Velerismo:before {
     content: "\e916";
 }
+
 

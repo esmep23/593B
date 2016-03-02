@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c"></script>
+    <!--<script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c"></script>-->
 
     <title>_app PLAYAS_</title>
     
@@ -248,6 +248,7 @@
               <div class="content-block">
                 <div class="resultado"><div> RESULTADOS DE PLAYAS </div></div>
                 
+             
                 <div class="contenido">
                   
                   
@@ -390,6 +391,55 @@ map.setCenter(
                     </script>
                     <div id="map1" style="width:650px;height:240px;border:2px solid blue;"></div>
                     -->
+
+                    <div id="map"></div>
+    <script>
+
+    
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {lat: -33.9, lng: 151.2}
+        });
+
+        setMarkers(map);
+      }
+
+      var beaches = [
+        ['Bondi Beach', -33.890542, 151.274856, 4],
+        ['Coogee Beach', -33.923036, 151.259052, 5],
+        ['Cronulla Beach', -34.028249, 151.157507, 3],
+        ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+        ['Maroubra Beach', -33.950198, 151.259302, 1]
+      ];
+
+      function setMarkers(map) {
+        var image = {
+          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          size: new google.maps.Size(20, 32),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 32)
+        };
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+        for (var i = 0; i < beaches.length; i++) {
+          var beach = beaches[i];
+          var marker = new google.maps.Marker({
+            position: {lat: beach[1], lng: beach[2]},
+            map: map,
+            icon: image,
+            shape: shape,
+            title: beach[0],
+            zIndex: beach[3]
+          });
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c&callback=initMap">
+    </script>
                 </div>
               
               </div>

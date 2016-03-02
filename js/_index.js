@@ -31,6 +31,11 @@ $( document ).ready(function() {
 
   });
 
+  myApp.onPageBeforeInit('misplayas', function (page) {
+    misPlayas();
+  });
+  
+
   myApp.onPageInit('registro', function (page) {
     $('div.navbar').css('display','none');
   });
@@ -60,17 +65,42 @@ $( document ).ready(function() {
 
  
 }); // document ready
-
+/*
   function toggle_visibility_search(argument) {
       onRate = !onRate;
-      //alert(onRate);
+      alert(onRate);
       if(onRate){
           
       }else{
          
       } 
   }
+*/
+function toggle_visibility(argument) {
 
+    var e = document.getElementById('.playa-'+argument+' i');
+    
+    if($('.playa-'+argument+' i').hasClass('activo') ){
+
+        $('.playa-'+argument+' i').removeClass('activo');
+
+        var array = JSON.parse(localStorage.getItem( 'favoritos') );
+        var index = array.indexOf(argument);
+        if (index > -1) {
+
+        }else{
+            array.splice(1, JSON.stringify(index));
+              console.log('array'+array);            
+            localStorage.setItem('favoritos', JSON.stringify(array));
+        }
+
+    }else{
+
+        $('.playa-'+argument+' i').addClass('activo');
+        rate(argument);
+    }
+  
+}
 
   function sizeWindows(){
     // $('#busqueda .contenido').css('height', screen.height-(screen.height/1.8));
@@ -249,9 +279,9 @@ function playasOFFLine(){
         $('#busqueda .list-block ul').append('<li class="item-content" onclick="cargoDetalle('+_playas[playa].id_playa+');"><div class="item-inner"><div class="item-title">'+_playas[playa].slug+'</div></div></li>');
         
         if(_playas[playa].foto){
-           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="'+_playas[playa].foto+'" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="rate('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
+           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="'+_playas[playa].foto+'" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="toggle_visibility('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
         }else{
-           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="rate('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
+           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="toggle_visibility('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
         }
 
         
@@ -487,7 +517,12 @@ function misPlayas(){
        //console.log(_playas[p].id_playa +' - ' + favRate[x]);
          if(_playas[p].id_playa == favRate[x]){
             //console.log('OK ----------------------'+(p+1));
-            $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].nombre+'</figcaption><img src="img/comodin.png" /></figure></div></div>');
+            if(_playas[p].foto){
+              $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].nombre+'</figcaption><img src="'+_playas[p].foto+'" class="fotodestino" /></figure></div></div>');
+            }else{
+              $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].nombre+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div></div>');
+            }
+            /* ---- **/  
          }
         
       }
@@ -496,7 +531,7 @@ function misPlayas(){
 
 function rate(argument){
 
-  
+
 
   var oldItems = JSON.parse(localStorage.getItem('favoritos')) || [];
   var presto = oldItems.indexOf(argument);

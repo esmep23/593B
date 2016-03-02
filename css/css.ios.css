@@ -46,3 +46,10 @@ i.icon.icon-bars{
 .navbar-fixed .page>.searchbar, .navbar-fixed>.searchbar, .navbar-through .page>.searchbar, .navbar-through>.searchbar{
 	top:60px;
 }
+
+.list-block ul:before,
+.list-block ul:after,
+.list-block ul,
+.navbar:after{
+	background-color: transparent!important;
+}
