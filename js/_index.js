@@ -47,7 +47,9 @@ $( document ).ready(function() {
 
   myApp.onPageInit('mapa', function (page) {
 
-      /*function initMap() {
+    initMap();
+    
+       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
           center: {lat: -33.9, lng: 151.2}
@@ -86,31 +88,7 @@ $( document ).ready(function() {
             zIndex: beach[3]
           });
         }
-      }*/
-
-      var icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAdNJREFUeNrEVtFRg0AQBYZ/468/IR2QCoQKjBUIFWhmLCD8O2NSQexArCCkArEC8cdvOtBdZ89Zbo5jCSTZmR3gjn3v7rG3i+Ocydy+Ad+P0wAuITlaiX719FUdhZgIn8EXLa+8gGfSBbhC0oRIJx2v1uApkOeDiYE0gstOA8fdvdHzDXiiLWoO5KUN1xdseMvuESwG0JqNFbC4jBanvvsr+MwG6gkkDuixMpD+GY3FpAZaQLGHEZOMyjYmUo08Y0PXQ4gDLqngs5Qtsb2JQy2pRrMu4qJlERKFBhFz6e4FeHfsfj+EeMPuI8jUreUE4FykVbJBBWSnARaU4TnNL0iNxjswH49duSTWWblcAsc6/GCYrwBgRjImQlKUeAn+3pJsa8BcKuIfktCUEGu6fgqbhCqVpo1gUQmB+JLX6j0MrCySL7W6bbKUVbeVAWOlcsGDh1BSmQAQJbS1u1zQDkvV2z2BfI0dUbMwAaaC+P8m4mm/ME7HrjHwViuftSaxzSpOPGGgjoC8JHJFGncdHRbbIJ62yGcDwHyY9yHVFLrw6axVPYOdAwh5PoRK6lFbnrQ7YXJ9nJATi1TkHaPJi/6rqVye2mqf/g6jExPnzrnsV4ABAM22p4o/E0aTAAAAAElFTkSuQmCC";
-      var canvas = document.createElement('canvas');
-      canvas.width = 120;
-      canvas.height = 40;
-      var context = canvas.getContext('2d');
-
-      var img = new Image();
-      //img.src = "./images/google_logo.gif";
-      img.onload = function() {
-        context.drawImage(img, 0, 0);
-
-        context.font = '15pt Calibri';
-        context.fillStyle = 'blue';
-        context.fillText('Google', 40, 15);
-
-        map.addMarker({
-          'position': "-2.162934, -79.905385",
-          'title': canvas.toDataURL(),
-          'icon': icon
-        }, function(marker) {
-          marker.showInfoWindow();
-        });
-      };
+      }
   });
 
   //getMobileOperatingSystem();
