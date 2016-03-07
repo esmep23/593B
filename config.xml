@@ -51,5 +51,7 @@
     <gap:splash src="screen/windows/480x800.png" gap:platform="winphone" />
     <gap:splash src="splash.png" />
 
+    <plugin name="plugin.google.maps.menusito" spec="1.2.5" source="pgb" />
+
 	<content src="index.html" />
 </widget>

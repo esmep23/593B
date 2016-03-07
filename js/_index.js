@@ -45,6 +45,82 @@ $( document ).ready(function() {
     $('#map').css('height', screen.height-(screen.height/1.8));
   });
 
+  myApp.onPageInit('mapa', function (page) {
+
+      /*function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {lat: -33.9, lng: 151.2}
+        });
+
+        setMarkers(map);
+      }
+
+      var beaches = [
+        ['Bondi Beach', -33.890542, 151.274856, 4],
+        ['Coogee Beach', -33.923036, 151.259052, 5],
+        ['Cronulla Beach', -34.028249, 151.157507, 3],
+        ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+        ['Maroubra Beach', -33.950198, 151.259302, 1]
+      ];
+
+      function setMarkers(map) {
+        var image = {
+          url: 'https://pocket.ec/dev/beach_593/point.png',
+          size: new google.maps.Size(30, 30),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 30)
+        };
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+        for (var i = 0; i < beaches.length; i++) {
+          var beach = beaches[i];
+          var marker = new google.maps.Marker({
+            position: {lat: beach[1], lng: beach[2]},
+            map: map,
+            icon: image,
+            shape: shape,
+            title: beach[0],
+            zIndex: beach[3]
+          });
+        }
+      }*/
+
+      var icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAdNJREFUeNrEVtFRg0AQBYZ/468/IR2QCoQKjBUIFWhmLCD8O2NSQexArCCkArEC8cdvOtBdZ89Zbo5jCSTZmR3gjn3v7rG3i+Ocydy+Ad+P0wAuITlaiX719FUdhZgIn8EXLa+8gGfSBbhC0oRIJx2v1uApkOeDiYE0gstOA8fdvdHzDXiiLWoO5KUN1xdseMvuESwG0JqNFbC4jBanvvsr+MwG6gkkDuixMpD+GY3FpAZaQLGHEZOMyjYmUo08Y0PXQ4gDLqngs5Qtsb2JQy2pRrMu4qJlERKFBhFz6e4FeHfsfj+EeMPuI8jUreUE4FykVbJBBWSnARaU4TnNL0iNxjswH49duSTWWblcAsc6/GCYrwBgRjImQlKUeAn+3pJsa8BcKuIfktCUEGu6fgqbhCqVpo1gUQmB+JLX6j0MrCySL7W6bbKUVbeVAWOlcsGDh1BSmQAQJbS1u1zQDkvV2z2BfI0dUbMwAaaC+P8m4mm/ME7HrjHwViuftSaxzSpOPGGgjoC8JHJFGncdHRbbIJ62yGcDwHyY9yHVFLrw6axVPYOdAwh5PoRK6lFbnrQ7YXJ9nJATi1TkHaPJi/6rqVye2mqf/g6jExPnzrnsV4ABAM22p4o/E0aTAAAAAElFTkSuQmCC";
+      var canvas = document.createElement('canvas');
+      canvas.width = 120;
+      canvas.height = 40;
+      var context = canvas.getContext('2d');
+
+      var img = new Image();
+      img.src = "./images/google_logo.gif";
+      img.onload = function() {
+        context.drawImage(img, 0, 0);
+
+        context.font = '15pt Calibri';
+        context.fillStyle = 'blue';
+        context.fillText('Google', 40, 15);
+        context.fillText('Tokyo!', 60, 35);
+
+        map.addMarker({
+          'position': latLng,
+          'title': canvas.toDataURL(),
+          'icon': icon
+        }, function(marker) {
+          marker.showInfoWindow();
+        });
+      };
+      map.addMarker({
+        'position': latLng,
+        'title': canvas.toDataURL(),
+        'icon': icon
+      }, function(marker) {
+        marker.showInfoWindow();
+      });
+  });
+
   //getMobileOperatingSystem();
  
  
@@ -340,6 +416,7 @@ function cargoDetalle(argument){
         $('#infoPlayas .rated .stars i').removeClass('activo');
 
         
+        $('#infoPlayas .rated').empty();
 
 
         $('#infoPlayas .resultado > div').append(_playas[playa].nombre);
