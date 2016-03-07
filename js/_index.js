@@ -95,30 +95,22 @@ $( document ).ready(function() {
       var context = canvas.getContext('2d');
 
       var img = new Image();
-      img.src = "./images/google_logo.gif";
+      //img.src = "./images/google_logo.gif";
       img.onload = function() {
         context.drawImage(img, 0, 0);
 
         context.font = '15pt Calibri';
         context.fillStyle = 'blue';
         context.fillText('Google', 40, 15);
-        context.fillText('Tokyo!', 60, 35);
 
         map.addMarker({
-          'position': latLng,
+          'position': "-2.162934, -79.905385",
           'title': canvas.toDataURL(),
           'icon': icon
         }, function(marker) {
           marker.showInfoWindow();
         });
       };
-      map.addMarker({
-        'position': latLng,
-        'title': canvas.toDataURL(),
-        'icon': icon
-      }, function(marker) {
-        marker.showInfoWindow();
-      });
   });
 
   //getMobileOperatingSystem();
