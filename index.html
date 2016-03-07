@@ -9,15 +9,10 @@
 
     <title>_app PLAYAS_</title>
     
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/my-app.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script type="text/javascript" src="dist/js/framework7.min.js"></script>
+    <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
+
 
   </head>
   <body>
@@ -33,15 +28,9 @@
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-cover">
       <div class="content-block">
-       <p><img src="img/logo.png" /></p>
-        <div class="list-block">
+       <p><img src="img/logo2.png" /></p>
+        <div id="menuP" class="list-block">
                 <ul>
-                  <!--<li><a href="#registro" class="item-link">
-                      <div class="item-content">
-                        <div class="item-inner"> 
-                          <div class="item-title">Registro</div>
-                        </div>
-                      </div></a></li>-->
                   <li><a href="#busqueda" class="item-link close-panel">
                       <div class="item-content"> 
                         <div class="item-inner">
@@ -81,7 +70,7 @@
             <div class="left">
               <a href="#" data-panel="left" class="open-panel"><i class="icon fa fa-bars"></i></a>
             </div>
-            <div class="center"><p><img src="img/logo.png" /></p></div>
+            <div class="center"><p><img src="img/logo2.png" /></p></div>
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
@@ -96,7 +85,7 @@
           <!-- Navbar inner for About page-->
           <div data-page="infoPlayas" class="navbar-inner cached">
             <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
-            <div class="center sliding"><p><img src="img/logo.png" /></div>
+            <div class="center sliding"><p><img src="img/logo2.png" /></div>
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
@@ -148,7 +137,7 @@
           -->
           <div id="registro" data-page="registro" class="page cached">
             <div class="page-content">
-            <div id="espacioLogo"><img src="img/logo.png" /></div>
+            <div id="espacioLogo"><img src="img/logo2.png" /></div>
             
               <form class="cRegistro" id="cRegistro" method="post" action=""  novalidate="novalidate">
                 <div class="titulo-form"><h4>CREA TU PERFIL</h4></div>
@@ -184,13 +173,20 @@
                       </select>
                       <select name="anio" id="anio">
                         <option value="">Edad...</option>
-                          <option value="2010" >2010</option>
-                          <option value="2011" >2011</option>
-                          <option value="2012" >2012</option>
-                          <option value="2013" >2013</option>
-                          <option value="2014" >2014</option>
-                        <option value="2015" >2015</option>
-                          <option value="2016" >2016</option>
+                          <option value="18" >18</option>
+                          <option value="19" >19</option>
+                          <option value="20" >20</option>
+                          <option value="21" >21</option>
+                          <option value="22" >22</option>
+                          <option value="23" >23</option>
+                          <option value="24" >24</option>
+                          <option value="25" >25</option>
+                          <option value="26" >26</option>
+                          <option value="27" >27</option>
+                          <option value="28" >28</option>
+                          <option value="29" >29</option>
+                          <option value="30" >30</option>
+                          <option value="31" >31</option>
                       </select>
                   </div>
                 </div>
@@ -199,28 +195,41 @@
                     <input name="email" id="email" type="text" placeholder="Email">
                 </div>
                 <div >
-                  <input class="submit" type="submit" value="Enviar">
+                  <input class="submit" type="submit" value="GUARDAR">
                 </div>
               </form>
               <script type="text/javascript">
                 $( document ).ready(function() {
+
+                  jQuery.validator.setDefaults({
+                    debug: true,
+                    success: "valid"
+                  });
                   
                     $("#cRegistro").validate({
                            rules: {
                               nick: "required",
-                              pais: "required",
-                              anio: "required",
+                              pais: {
+                                required: true
+                              },
+                              anio: {
+                                required: true
+                              },
                               email: {
                                 required: true,
                                 email: true
                               }
                             },
                             messages: {
-                              nick: "Ingrese su nick name",
-                              pais: "Ingrese su Pais",
-                              anio: "Ingrese el año",
+                              nick: "*",
+                              pais: {
+                                required: "*"
+                              },
+                              anio: {
+                                required: "*"
+                              },
                               email: {
-                                required: "Necesitamos un email valido",
+                                required: "*",
                                 email: "Su email debe tener formato valido name@domain.com"
                               }
                             },
@@ -247,14 +256,8 @@
             <div class="page-content">
               <div class="content-block">
                 <div class="resultado"><div> RESULTADOS DE PLAYAS </div></div>
-                
-             
                 <div class="contenido">
-                  
-                  
-
                 </div>
-              
               </div>
             </div>
           </div>
@@ -294,14 +297,14 @@
           <div id="infoPlayas" data-page="infoPlayas" class="page cached">
             <div class="page-content">
               <div class="content-block">
-                <div class="resultado col-sm-12 col-xs-12"><div>SALINAS</div></div>
+                <div class="resultado"><div></div></div>
                   <div class="contenido">
                     <article>
                       <figure>
                         <img src="img/comodin.png" />
                       </figure>
                       <div class="rated">
-                        <div class="stars"><i class="fa fa-star"></i></div>
+                        
                       </div>
 
                       <div class="detalles">
@@ -415,10 +418,10 @@ map.setCenter(
 
       function setMarkers(map) {
         var image = {
-          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-          size: new google.maps.Size(20, 32),
+          url: 'https://pocket.ec/dev/beach_593/point.png',
+          size: new google.maps.Size(30, 30),
           origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 32)
+          anchor: new google.maps.Point(0, 30)
         };
         var shape = {
           coords: [1, 1, 1, 20, 18, 20, 18, 1],
@@ -457,11 +460,17 @@ map.setCenter(
 
       </div>
     </div>
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="dist/js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
+    
 
+   
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/my-app.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/_index.js"></script>
     
   </body>

@@ -40,6 +40,11 @@ $( document ).ready(function() {
     $('div.navbar').css('display','none');
   });
 
+  myApp.onPageInit('mapa', function (page) {
+    $('#map').css('width', screen.width-(screen.width/1.8));
+    $('#map').css('height', screen.height-(screen.height/1.8));
+  });
+
   //getMobileOperatingSystem();
  
  
@@ -272,9 +277,8 @@ function playasOFFLine(){
   //[11] - status
   //[12] - descripcion
   //[13] - foto
-      
+ 
       for ( playa in _playas) {
-         //console.log( _playas[playa].nombre );
         
         $('#busqueda .list-block ul').append('<li class="item-content" onclick="cargoDetalle('+_playas[playa].id_playa+');"><div class="item-inner"><div class="item-title">'+_playas[playa].slug+'</div></div></li>');
         
@@ -284,27 +288,24 @@ function playasOFFLine(){
            $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="toggle_visibility('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
         }
 
-        
-
         for ( actividad in _actividades) {
-
             
-            //console.log(argument);
-            if (_actividades[actividad].playa == _playas[playa].id_playa ){
+                if (_actividades[actividad].playa == _playas[playa].id_playa ){
 
-              console.log(_actividades[actividad].tipo);
-              if ( _actividades[actividad].tipo == '1'){
-                console.log('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades');
-                $('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
-              
-              }else{
-                console.log('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades');
-                $('#playas .contenido .playa-'+_actividades[actividad].playa+' .mServicios').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
-              
-              }
-              
-            }
+                  console.log(_actividades[actividad].tipo);
+                  if ( _actividades[actividad].tipo == '1'){
+                    console.log('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades');
+                    $('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
+                  
+                  }else{
+                    console.log('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades');
+                    $('#playas .contenido .playa-'+_actividades[actividad].playa+' .mServicios').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
+                  
+                  }
+                  
             
+                }
+  
         }
 
       
@@ -313,7 +314,7 @@ function playasOFFLine(){
           $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa icon-hospital"></i></div>');
           $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa icon-chiringo"></i></div>');
           $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mActividades').append('<div class="item item-actividades"><i class="fa icon-tiendas"></i></div>');
-          console.log(_playas[playa].id_playa);
+          
           $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa icon-Kitesurf"></i></div>');
           $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa icon-avistamiento-aves"></i></div>');
           $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa icon-cabalgatas"></i></div>');
@@ -324,7 +325,6 @@ function playasOFFLine(){
 }
 
 function cargoDetalle(argument){
-    console.log('cargoDetalle');
 
 
 
@@ -338,8 +338,11 @@ function cargoDetalle(argument){
         $('#infoPlayas .contenido .mActividades').empty();
         $('#infoPlayas .contenido .mServicios').empty();
         $('#infoPlayas .rated .stars i').removeClass('activo');
+
         
-        $('#infoPlayas .resultado > div').append('<h3>'+_playas[playa].nombre+'</h3>');
+
+
+        $('#infoPlayas .resultado > div').append(_playas[playa].nombre);
         $('#infoPlayas .contenido').append('<div id="goMapa" onclick="cargoMapa('+_playas[playa].mapa+')"><span class="fa fa-map-marker fa-4x"></span></div>');
         $('#infoPlayas .informacion-lugar').append(_playas[playa].descripcion);
 
@@ -355,9 +358,12 @@ function cargoDetalle(argument){
         }
         if (presto == -1){
           //oldItems.push(argument);
-          $('#infoPlayas .rated .stars i').removeClass('activo');
+          $('#infoPlayas .rated').append('<div class="stars" onclick="toggle_visibility('+_playas[playa].id_playa+')"><i class="fa fa-star"></i></div>');
+          //$('#infoPlayas .rated .stars').attr('onclick',);
+          //$('#infoPlayas .rated .stars i').removeClass('activo');
         }else{
-          $('#infoPlayas .rated .stars i').addClass('activo');
+          //$('#infoPlayas .rated .stars i').addClass('activo');
+          $('#infoPlayas .rated').append('<div class="stars" onclick="toggle_visibility('+_playas[playa].id_playa+')"><i class="fa fa-star activo"></i></div>');
         }
 
                 for ( actividad in _actividades) {
