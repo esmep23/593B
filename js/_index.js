@@ -34,6 +34,8 @@ $( document ).ready(function() {
   myApp.onPageBeforeInit('misplayas', function (page) {
     misPlayas();
   });
+
+
   
 
   myApp.onPageInit('registro', function (page) {
@@ -388,7 +390,7 @@ function cargoDetalle(argument){
         $('#infoPlayas .rated').empty();
 
 
-        $('#infoPlayas .resultado > div').append(_playas[playa].nombre);
+        $('#infoPlayas .resultado > div').append(_playas[playa].slug);
         $('#infoPlayas .contenido').append('<div id="goMapa" onclick="cargoMapa('+_playas[playa].mapa+')"><span class="fa fa-map-marker fa-4x"></span></div>');
         $('#infoPlayas .informacion-lugar').append(_playas[playa].descripcion);
 
