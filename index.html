@@ -5,27 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <!--<script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c"></script>-->
-
     <title>_app PLAYAS_</title>
-    
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="dist/js/framework7.min.js"></script>
     <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
-
-
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/my-app.css">
+    <link rel="stylesheet" href="css/icomoon.css">
   </head>
   <body>
 
-  <div id="map_canvas"
-    style="position:absolute;top:30px;bottom:50px;left:0;right:0;"></div>
-
-    
-    <!-- Status bar overlay for fullscreen mode-->
     <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
     <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-cover">
       <div class="content-block">
        <p><img src="img/logo2.png" /></p>
@@ -54,18 +46,12 @@
       </div>
     </div>
 
-    <!-- Views-->
     <div class="views">
-      <!-- Your main view, should have "view-main" class-->
       <div class="view view-main">
-        <!-- Top Navbar-->
         <div class="navbar">
-
-          
           <div data-page="index" class="navbar-inner">
           </div>
 
-          <!-- Navbar inner for Index page-->
           <div id="home" data-page="playas" class="navbar-inner cached">
             <div class="left">
               <a href="#" data-panel="left" class="open-panel"><i class="icon fa fa-bars"></i></a>
@@ -76,13 +62,11 @@
             </div>
           </div>
 
-          <!-- Navbar inner for About page-->
           <div id="pageBusqueda" data-page="busqueda" class="navbar-inner cached">
             <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
             <div class="center sliding"><p><img src="img/logo2.png" /></p></div>
           </div>
 
-          <!-- Navbar inner for About page-->
           <div data-page="infoPlayas" class="navbar-inner cached">
             <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
             <div class="center sliding"><p><img src="img/logo2.png" /></div>
@@ -91,28 +75,26 @@
             </div>
           </div>
 
-          <!-- Navbar inner for Form page-->
           <div data-page="registro" class="navbar-inner cached">
             
           </div>
-          <!-- Navbar inner for Form page-->
+
           <div data-page="misplayas" class="navbar-inner cached">
             <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
-            <div class="center sliding"><p><img src="img/logo.png" /></p></div>
+            <div class="center sliding"><p><img src="img/logo2.png" /></p></div>
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
           </div>
-          <!-- Navbar inner for Form page-->
+
           <div data-page="mapa" class="navbar-inner cached">
             <div class="left sliding"><a href="#" class="back link"> <i class="icon fa fa-chevron-left"></i></a></div>
-            <div class="center sliding"><p><img src="img/logo.png" /></p></div>
+            <div class="center sliding"><p><img src="img/logo2.png" /></p></div>
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
           </div>
         </div>
-        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
         <div class="pages navbar-through toolbar-through">
           <!--
           |================================================================================|
@@ -120,7 +102,6 @@
           |================================================================================|
           -->
           <div id="index" data-page="index" class="page">
-            <!-- Scrollable page content-->
             <div class="page-content">
                 <img src="img/logo.png" class="homeLogo"/>
                 <div class="content-block">
@@ -263,27 +244,23 @@
           </div>
           <!--
           |================================================================================|
-          | INFO                               
+          | busqueda                               
           |================================================================================|
           -->
           <div id="busqueda" data-page="busqueda"  class="page cached">
-            <!-- Search Bar -->
             <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
               <div class="searchbar-input">
                 <input type="search" placeholder="Buscar"><a href="#" class="searchbar-clear"></a>
               </div><a href="#" class="searchbar-cancel">Cancel</a>
             </form>
            
-            <!-- Search Bar overlay -->
             <div class="searchbar-overlay"></div>
            
             <div class="page-content">
-              <!-- This block will be displayed if nothing found -->
               <div class="content-block searchbar-not-found">
                 <div class="content-block-inner">No encontrado</div>
               </div>
            
-              <!-- This block will be displayed if anything found, and this list block is used a searbar target -->
               <div class="list-block list-block-search searchbar-found">
                 
               </div>
@@ -291,7 +268,7 @@
           </div>    
           <!--
           |================================================================================|
-          | MAPA                               
+          | infoPlayas                               
           |================================================================================|
           -->
           <div id="infoPlayas" data-page="infoPlayas" class="page cached">
@@ -358,54 +335,19 @@
               <div class="content-block">
                 <!--<div class="resultado"><div>MAPAS</div></div>-->
                 
-                <div class="row contenido">
-                    <!--<script type="text/javascript">
-                    //<![CDATA[  
-                    google.load('maps', '2', {callback:simple});
-                    var map;
-                    function simple(){  
-                      if (GBrowserIsCompatible()) { 
-                      var map = new GMap2(document.getElementById("map1"));
-map.setCenter(
-                        new GLatLng(-2.162024, -79.906211), 8);
-                      }
-                      var point;
-                      var x;
-                      var locations = new Array();
-                      locations[0] = [-2.176311, -79.895119];
-                      locations[1] = [-2.134669, -79.898168];
-
-                              for (x in locations) {
-                                  point = new GLatLng(locations[x]);
-                                  map.addOverlay(new GMarker(point));
-                              }
-                    
-
-                      //var marker = createMarker(point,'La Universidad de la Habana')
-                      //map.addOverlay(marker);
+                <div class="row contenido" >
+                    <div id="map" style="height: 100%"></div>
+                    <script type="text/javascript">
                       
-                    }
-                    function createMarker(point,html) {
-                      var marker = new GMarker(point);
-                      GEvent.addListener(marker, "click", function() {
-                      marker.openInfoWindowHtml(html);});
-                      return marker;
-                    }  
-                    window.onload=function(){simple();}
-                    //]]>
+
+      
+      
+
                     </script>
-                    <div id="map1" style="width:650px;height:240px;border:2px solid blue;"></div>
-                    -->
-
-                    <div id="map"></div>
-    <script>
-
-    
-   
+                    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c">
     </script>
-    <!--<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c&callback=initMap">
-    </script>-->
+                    <!-- aqui mapa -->
                 </div>
               
               </div>
@@ -427,12 +369,11 @@ map.setCenter(
 
    
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/my-app.css">
-    <link rel="stylesheet" href="css/icomoon.css">
+
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
     <script type="text/javascript" src="js/jquery.validate.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="js/my-app.js"></script>
     <script type="text/javascript" src="js/_index.js"></script>
     

@@ -8,6 +8,8 @@ var map;
 var onSearch = false; //toggle
 var value = localStorage.getItem('token');
 
+var beaches = new Array();
+
 $( document ).ready(function() {
    
   //sizeWindows();
@@ -21,7 +23,6 @@ $( document ).ready(function() {
 
     
     setTimeout(function(){ 
-      console.log('-1-');
       playasOFFLine();
       cargoFavoritos();
       misPlayas();
@@ -49,34 +50,26 @@ $( document ).ready(function() {
 
   myApp.onPageInit('mapa', function (page) {
 
-    
-       function initMap() {
+    initMap();
+
+ function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: {lat: -33.9, lng: 151.2}
+          zoom: 7,
+          center: {lat: -1.896030, lng:  -79.914748}
         });
 
         setMarkers(map);
       }
 
-      var beaches = [
-        ['Bondi Beach', -33.890542, 151.274856, 4],
-        ['Coogee Beach', -33.923036, 151.259052, 5],
-        ['Cronulla Beach', -34.028249, 151.157507, 3],
-        ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-        ['Maroubra Beach', -33.950198, 151.259302, 1]
-      ];
+
 
       function setMarkers(map) {
+        
         var image = {
           url: 'https://pocket.ec/dev/beach_593/point.png',
           size: new google.maps.Size(30, 30),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(0, 30)
-        };
-        var shape = {
-          coords: [1, 1, 1, 20, 18, 20, 18, 1],
-          type: 'poly'
         };
         for (var i = 0; i < beaches.length; i++) {
           var beach = beaches[i];
@@ -84,12 +77,12 @@ $( document ).ready(function() {
             position: {lat: beach[1], lng: beach[2]},
             map: map,
             icon: image,
-            shape: shape,
-            title: beach[0],
-            zIndex: beach[3]
+            title: beach[0]
           });
         }
       }
+
+   
   });
 
   //getMobileOperatingSystem();
@@ -324,24 +317,41 @@ function playasOFFLine(){
   //[11] - status
   //[12] - descripcion
   //[13] - foto
- 
+  
       for ( playa in _playas) {
         
         $('#busqueda .list-block ul').append('<li class="item-content" onclick="cargoDetalle('+_playas[playa].id_playa+');"><div class="item-inner"><div class="item-title">'+_playas[playa].slug+'</div></div></li>');
         
+        if(_playas[playa].mapa){
+              var valueToPush = { };
+
+              valueToPush[0] = _playas[playa].nombre;
+
+              var mm = _playas[playa].mapa;
+              var m = mm.split(",");
+
+              valueToPush[1] =m[0];
+              valueToPush[2] =m[1];
+              valueToPush[3] = "2";
+              
+                      
+             beaches.push(valueToPush);
+             console.log(beaches);
+        }
+
         if(_playas[playa].foto){
-           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="'+_playas[playa].foto+'" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="toggle_visibility('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
+           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="'+_playas[playa].foto+'" class="fotodestino" /></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="toggle_visibility('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
         }else{
-           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="toggle_visibility('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
+           $('#playas .contenido').append('<div class="row playa playa-'+_playas[playa].id_playa+'" ><div class="col-50" onclick="cargoDetalle('+_playas[playa].id_playa+');"><figcaption>'+_playas[playa].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></div><div class="col-50"><h5>Actividades</h5><div class="mActividades"></div><h5>Servicios</h5><div class="mServicios"></div></div><div class="rateStar"><div class="favoriteStar" onclick="toggle_visibility('+_playas[playa].id_playa+')" ><i class="fa fa-star fa-lg"></i></div></div></div>');
         }
 
         for ( actividad in _actividades) {
             
                 if (_actividades[actividad].playa == _playas[playa].id_playa ){
 
-                  console.log(_actividades[actividad].tipo);
+                  
                   if ( _actividades[actividad].tipo == '1'){
-                    console.log('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades');
+                    
                     $('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
                   
                   }else{
@@ -396,8 +406,7 @@ function cargoDetalle(argument){
 
         var oldItems = localStorage.getItem('favoritos');
         var presto = oldItems.indexOf(argument);
-        console.log('pruebaaaaaaaaaaaaaa'+presto);
-
+        
         $('#infoPlayas .contenido article figure').empty();
         if(_playas[playa].foto){
             $('#infoPlayas .contenido article figure').append('<img src="'+_playas[playa].foto+'" />');
@@ -422,11 +431,11 @@ function cargoDetalle(argument){
 
                       //console.log(_actividades[actividad].tipo);
                       if ( _actividades[actividad].tipo == '1'){
-                        console.log('#infoPlayas .contenido .mActividades');
+                        //console.log('#infoPlayas .contenido .mActividades');
                         $('#infoPlayas .contenido .mActividades').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
                       
                       }else{
-                        console.log('#infoPlayas .contenido .mServicios');
+                        //console.log('#infoPlayas .contenido .mServicios');
                         $('#infoPlayas .contenido .mServicios').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
                       
                       }
@@ -518,6 +527,7 @@ function guardoDatos(){
         $info.append("<li>lastModifiedDate:<span>" + file.lastModifiedDate + " bytes</span></li>");
       }
       $info.listview("refresh");*/
+
     });
 
  function displayAsImage3(file, containerid) {
@@ -572,9 +582,9 @@ function misPlayas(){
          if(_playas[p].id_playa == favRate[x]){
             //console.log('OK ----------------------'+(p+1));
             if(_playas[p].foto){
-              $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].nombre+'</figcaption><img src="'+_playas[p].foto+'" class="fotodestino" /></figure></div></div>');
+              $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].slug+'</figcaption><img src="'+_playas[p].foto+'" class="fotodestino" /></figure></div></div>');
             }else{
-              $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].nombre+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div></div>');
+              $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div></div>');
             }
             /* ---- **/  
          }
