@@ -7,6 +7,7 @@ var favoritos;
 var map;
 var onSearch = false; //toggle
 var value = localStorage.getItem('token');
+var beaches = new Array();
 
 var beaches = new Array();
 
@@ -21,15 +22,13 @@ $( document ).ready(function() {
 
   myApp.onPageInit('playas', function (page) {
 
-    
+     
     setTimeout(function(){ 
       playasOFFLine();
-      cargoFavoritos();
-      misPlayas();
 
       $('div.navbar').css('display','block');
     }, 1000);
-
+   
   });
 
   myApp.onPageBeforeInit('misplayas', function (page) {
@@ -50,6 +49,7 @@ $( document ).ready(function() {
 
   myApp.onPageInit('mapa', function (page) {
 
+    $('#map').empty();
     initMap();
 
  function initMap() {
@@ -73,8 +73,12 @@ $( document ).ready(function() {
         };
         for (var i = 0; i < beaches.length; i++) {
           var beach = beaches[i];
+          console.log(beach[0]);
+          console.log(parseFloat(beach[1].trim()));
+          console.log(parseFloat(beach[2].trim()));
+
           var marker = new google.maps.Marker({
-            position: {lat: beach[1], lng: beach[2]},
+            position: {lat: parseFloat(beach[1].trim()), lng: parseFloat(beach[2].trim())},
             map: map,
             icon: image,
             title: beach[0]
@@ -103,6 +107,7 @@ $( document ).ready(function() {
   if(value){
     //alert('TENGO');    
      mainView.router.load({pageName: 'playas', animatePages: false});
+      
   }else{
     //alert('NO TENGO');  
      mainView.router.load({pageName: 'registro', animatePages: false});
@@ -318,6 +323,7 @@ function playasOFFLine(){
   //[12] - descripcion
   //[13] - foto
   
+      _playas = JSON.parse(localStorage.getItem( '_playas'));
       for ( playa in _playas) {
         
         $('#busqueda .list-block ul').append('<li class="item-content" onclick="cargoDetalle('+_playas[playa].id_playa+');"><div class="item-inner"><div class="item-title">'+_playas[playa].slug+'</div></div></li>');
@@ -377,19 +383,22 @@ function playasOFFLine(){
           $('#playas .contenido .playa-'+_playas[playa].id_playa +' .mServicios').append('<div class="item item-actividades"><i class="fa icon-cabalgatas"></i></div>');
           
 
-        } 
+        }
+
+        cargoFavoritos(); 
     
 }
 
 function cargoDetalle(argument){
 
 
-
+    _playas = JSON.parse(localStorage.getItem( '_playas'));
     mainView.router.load({pageName: 'infoPlayas'});
 
     for ( playa in _playas) {
       if (_playas[playa].id_playa == argument ){
-        $('#infoPlayas .resultado > div').empty();
+        //$('#infoPlayas .resultado > div').empty();
+        $('#obPlaya > div').empty();
         //$('#infoPlayas .contenido').empty();
         $('#infoPlayas .informacion-lugar').empty();
         $('#infoPlayas .contenido .mActividades').empty();
@@ -400,7 +409,10 @@ function cargoDetalle(argument){
         $('#infoPlayas .rated').empty();
 
 
-        $('#infoPlayas .resultado > div').append(_playas[playa].slug);
+
+        //$('#infoPlayas .resultado > div').append(_playas[playa].slug);
+        $('#obPlaya > div').append(_playas[playa].slug);
+
         $('#infoPlayas .contenido').append('<div id="goMapa" onclick="cargoMapa('+_playas[playa].mapa+')"><span class="fa fa-map-marker fa-4x"></span></div>');
         $('#infoPlayas .informacion-lugar').append(_playas[playa].descripcion);
 
@@ -560,9 +572,9 @@ function guardoDatos(){
 function cargoMapa(argument1, argument2){
   //alert(argument1 +' - '+argument2);
   console.log(argument1+ '-' +argument2);
-  mainView.router.load({pageName: 'mapa'});
-  $('#mapa .contenido').empty();
-  $('#mapa .contenido').append('<iframe src = "https://maps.google.com/maps?q='+argument1+','+argument2+'&hl=es;z=8&amp;output=embed" style="height: 500px; border: 0"></iframe>');
+  mainView.router.load({pageName: 'mapa2'});
+  $('#mapa2 .contenido #mapa').empty();
+  $('#mapa2 .contenido #mapa').append('<iframe src = "https://maps.google.com/maps?q='+argument1+','+argument2+'&hl=es;z=8&amp;output=embed" style="height: 500px; border: 0"></iframe>');
 }
 
 

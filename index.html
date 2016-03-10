@@ -7,9 +7,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>_app PLAYAS_</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="dist/js/framework7.min.js"></script>
-    <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
     
+    <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
+    <script type="text/javascript" src="dist/js/framework7.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/my-app.css">
     <link rel="stylesheet" href="css/icomoon.css">
@@ -60,6 +60,10 @@
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
+            
+            <div class="subnavbar">
+              <div class="resultado"><div> RESULTADOS DE PLAYAS </div></div>
+            </div>
           </div>
 
           <div id="pageBusqueda" data-page="busqueda" class="navbar-inner cached">
@@ -73,6 +77,9 @@
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
+            <div class="subnavbar">
+              <div id="obPlaya" class="resultado"><div>  </div></div>
+            </div>
           </div>
 
           <div data-page="registro" class="navbar-inner cached">
@@ -85,6 +92,9 @@
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
+            <div class="subnavbar">
+              <div class="resultado"><div> MIS PLAYAS </div></div>
+            </div>
           </div>
 
           <div data-page="mapa" class="navbar-inner cached">
@@ -92,6 +102,9 @@
             <div class="center sliding"><p><img src="img/logo2.png" /></p></div>
             <div class="right">
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
+            </div>
+            <div class="subnavbar">
+              <div class="resultado"><div> Mapa </div></div>
             </div>
           </div>
         </div>
@@ -236,7 +249,7 @@
           <div id="playas" data-page="playas" class="page cached">
             <div class="page-content">
               <div class="content-block">
-                <div class="resultado"><div> RESULTADOS DE PLAYAS </div></div>
+                
                 <div class="contenido">
                 </div>
               </div>
@@ -274,7 +287,7 @@
           <div id="infoPlayas" data-page="infoPlayas" class="page cached">
             <div class="page-content">
               <div class="content-block">
-                <div class="resultado"><div></div></div>
+                
                   <div class="contenido">
                     <article>
                       <figure>
@@ -313,7 +326,7 @@
           <div id="misplayas" data-page="misplayas" class="page cached">
             <div class="page-content">
               <div class="content-block">
-                <div class="resultado"><div>MIS PLAYAS</div></div>
+                
                 
                 <div class="row contenido">
                   
@@ -333,8 +346,7 @@
           <div id="mapa" data-page="mapa" class="page cached">
             <div class="page-content">
               <div class="content-block">
-                <!--<div class="resultado"><div>MAPAS</div></div>-->
-                
+                 
                 <div class="row contenido" >
                     <div id="map" style="height: 100%"></div>
                     <script type="text/javascript">
@@ -356,7 +368,31 @@
           
           
 
+          
 
+        
+          <div id="mapa2" data-page="mapa2" class="page cached">
+            <div class="page-content">
+              <div class="content-block">
+                 
+                <div class="row contenido" >
+                    <div id="mapa" style="height: 100%"></div>
+                    <script type="text/javascript">
+                      
+
+      
+      
+
+                    </script>
+                    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c">
+    </script>
+                    <!-- aqui mapa -->
+                </div>
+              
+              </div>
+            </div>
+          </div>  
    
 
 
