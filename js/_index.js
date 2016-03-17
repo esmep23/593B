@@ -14,9 +14,14 @@ var beaches = new Array();
 $( document ).ready(function() {
    
   //sizeWindows();
+
    
   if (localStorage.getItem("favoritos") === null) {
     localStorage.setItem( 'favoritos', "0" );
+  }
+
+  if ($$('body').hasClass('with-panel-left-cover')) {
+      console.log('Left Panel is opened')
   }
 
 
@@ -43,11 +48,11 @@ $( document ).ready(function() {
   });
 
   myApp.onPageInit('mapa', function (page) {
-    $('#map').css('width', screen.width-(screen.width/1.8));
-    $('#map').css('height', screen.height-(screen.height/1.8));
+    $('#map').css('width','100%');
+    $('#map').css('height', screen.height-(screen.height/2)-80 );
   });
 
-  myApp.onPageInit('mapa', function (page) {
+  /*myApp.onPageInit('mapa', function (page) {
 
     $('#map').empty();
     initMap();
@@ -87,7 +92,7 @@ $( document ).ready(function() {
       }
 
    
-  });
+  });*/
 
   //getMobileOperatingSystem();
  
@@ -331,7 +336,7 @@ function playasOFFLine(){
         if(_playas[playa].mapa){
               var valueToPush = { };
 
-              valueToPush[0] = _playas[playa].nombre;
+              valueToPush[0] = _playas[playa].id_playa;
 
               var mm = _playas[playa].mapa;
               var m = mm.split(",");
@@ -399,6 +404,7 @@ function cargoDetalle(argument){
       if (_playas[playa].id_playa == argument ){
         //$('#infoPlayas .resultado > div').empty();
         $('#obPlaya > div').empty();
+        $('#nameMapa > div').empty();
         //$('#infoPlayas .contenido').empty();
         $('#infoPlayas .informacion-lugar').empty();
         $('#infoPlayas .contenido .mActividades').empty();
@@ -412,7 +418,7 @@ function cargoDetalle(argument){
 
         //$('#infoPlayas .resultado > div').append(_playas[playa].slug);
         $('#obPlaya > div').append(_playas[playa].slug);
-
+        $('#nameMapa > div').append(_playas[playa].slug);
         $('#infoPlayas .contenido').append('<div id="goMapa" onclick="cargoMapa('+_playas[playa].mapa+')"><span class="fa fa-map-marker fa-4x"></span></div>');
         $('#infoPlayas .informacion-lugar').append(_playas[playa].descripcion);
 
@@ -572,9 +578,38 @@ function guardoDatos(){
 function cargoMapa(argument1, argument2){
   //alert(argument1 +' - '+argument2);
   console.log(argument1+ '-' +argument2);
-  mainView.router.load({pageName: 'mapa2'});
-  $('#mapa2 .contenido #mapa').empty();
-  $('#mapa2 .contenido #mapa').append('<iframe src = "https://maps.google.com/maps?q='+argument1+','+argument2+'&hl=es;z=8&amp;output=embed" style="height: 500px; border: 0"></iframe>');
+  mainView.router.load({pageName: 'mapa'});
+  //$('#mapa2 .contenido #mapa').empty();
+  //$('#mapa2 .contenido #mapa').append('<iframe src = "https://maps.google.com/maps?q='+argument1+','+argument2+'&hl=es;z=8&amp;output=embed" style="height: 500px; border: 0"></iframe>');
+
+
+    $('#map').empty();
+    initMap();
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: parseFloat(argument1), lng:  parseFloat(argument2)}
+        });
+
+        setMarkers(map);
+     }
+
+    function setMarkers(map) {
+      var image = {
+        url: 'https://pocket.ec/dev/beach_593/point.png',
+        size: new google.maps.Size(30, 30),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 30)
+      };
+        var marker = new google.maps.Marker({
+          position: {lat: parseFloat(argument1), lng: parseFloat(argument2)},
+          map: map,
+          icon: image
+        });
+      
+    }
+
 }
 
 

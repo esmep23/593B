@@ -35,12 +35,6 @@
                           <div class="item-title">Mis Playas</div>
                         </div>
                       </div></a></li>
-                  <li><a href="#mapa" class="item-link close-panel">
-                      <div class="item-content"> 
-                        <div class="item-inner">
-                          <div class="item-title">Mapa</div>
-                        </div>
-                      </div></a></li>
                 </ul>
               </div>
       </div>
@@ -104,7 +98,7 @@
                 <a href="#busqueda" ><i class="fa fa-search"></i></a>
             </div>
             <div class="subnavbar">
-              <div class="resultado"><div> Mapa </div></div>
+              <div id="nameMapa" class="resultado"><div> Mapa </div></div>
             </div>
           </div>
         </div>
@@ -114,7 +108,7 @@
           | INICIO                               
           |================================================================================|
           -->
-          <div id="index" data-page="index" class="page">
+          <!--<div id="index" data-page="index" class="page">
             <div class="page-content">
                 <img src="img/logo.png" class="homeLogo"/>
                 <div class="content-block">
@@ -123,7 +117,24 @@
                   </footer>
                 </div>
             </div>
+          </div>-->
+
+          
+          <!--
+          |================================================================================|
+          | PLAYA HOME                               
+          |================================================================================|
+          -->
+          <div id="playas" data-page="playas" class="page cached">
+            <div class="page-content">
+              <div class="content-block">
+                
+                <div class="contenido">
+                </div>
+              </div>
+            </div>
           </div>
+
           <!--
           |================================================================================|
           | REGISTRO                               
@@ -240,21 +251,7 @@
 
             </div>
           </div>
-          
-          <!--
-          |================================================================================|
-          | BUSQUEDA                               
-          |================================================================================|
-          -->
-          <div id="playas" data-page="playas" class="page cached">
-            <div class="page-content">
-              <div class="content-block">
-                
-                <div class="contenido">
-                </div>
-              </div>
-            </div>
-          </div>
+
           <!--
           |================================================================================|
           | busqueda                               
@@ -271,7 +268,7 @@
            
             <div class="page-content">
               <div class="content-block searchbar-not-found">
-                <div class="content-block-inner">No encontrado</div>
+                <div class="content-block-inner">No encontramos coincidencia con la busqueda</div>
               </div>
            
               <div class="list-block list-block-search searchbar-found">
@@ -371,28 +368,7 @@
           
 
         
-          <div id="mapa2" data-page="mapa2" class="page cached">
-            <div class="page-content">
-              <div class="content-block">
-                 
-                <div class="row contenido" >
-                    <div id="mapa" style="height: 100%"></div>
-                    <script type="text/javascript">
-                      
-
-      
-      
-
-                    </script>
-                    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxjkDTqarZuUpYLOVYid6sG6LTZ_3RI9c">
-    </script>
-                    <!-- aqui mapa -->
-                </div>
-              
-              </div>
-            </div>
-          </div>  
+        
    
 
 
