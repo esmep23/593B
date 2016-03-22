@@ -21,7 +21,7 @@ $( document ).ready(function() {
   }
 
   if ($$('body').hasClass('with-panel-left-cover')) {
-      console.log('Left Panel is opened')
+     // console.log('Left Panel is opened')
   }
 
 
@@ -52,48 +52,7 @@ $( document ).ready(function() {
     $('#map').css('height', screen.height-(screen.height/2)-80 );
   });
 
-  /*myApp.onPageInit('mapa', function (page) {
-
-    $('#map').empty();
-    initMap();
-
- function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: {lat: -1.896030, lng:  -79.914748}
-        });
-
-        setMarkers(map);
-      }
-
-
-
-      function setMarkers(map) {
-        
-        var image = {
-          url: 'https://pocket.ec/dev/beach_593/point.png',
-          size: new google.maps.Size(30, 30),
-          origin: new google.maps.Point(0, 0),
-          anchor: new google.maps.Point(0, 30)
-        };
-        for (var i = 0; i < beaches.length; i++) {
-          var beach = beaches[i];
-          console.log(beach[0]);
-          console.log(parseFloat(beach[1].trim()));
-          console.log(parseFloat(beach[2].trim()));
-
-          var marker = new google.maps.Marker({
-            position: {lat: parseFloat(beach[1].trim()), lng: parseFloat(beach[2].trim())},
-            map: map,
-            icon: image,
-            title: beach[0]
-          });
-        }
-      }
-
-   
-  });*/
-
+ 
   //getMobileOperatingSystem();
  
  
@@ -118,6 +77,25 @@ $( document ).ready(function() {
      mainView.router.load({pageName: 'registro', animatePages: false});
   }
 
+
+  //imagenes
+  if (window.File && window.FileReader && window.FormData) {
+        var $inputField = $('#file');
+
+        $inputField.on('change', function (e) {
+          var file = e.target.files[0];
+
+          if (file) {
+            if (/^image\//i.test(file.type)) {
+              readFile(file);
+            } else {
+              alert('Not a valid image!');
+            }
+          }
+        });
+      } else {
+        alert("File upload is not supported!");
+      }
  
 }); // document ready
 /*
@@ -125,36 +103,79 @@ $( document ).ready(function() {
       onRate = !onRate;
       alert(onRate);
       if(onRate){
-          
+          alert();
       }else{
-         
+         alert();
       } 
   }
 */
 function toggle_visibility(argument) {
-
+    alert(argument);
     var e = document.getElementById('.playa-'+argument+' i');
     
     if($('.playa-'+argument+' i').hasClass('activo') ){
-
+        
         $('.playa-'+argument+' i').removeClass('activo');
 
+        //var array = JSON.parse(localStorage.getItem( 'favoritos') );
         var array = JSON.parse(localStorage.getItem( 'favoritos') );
+        console.log(JSON.parse(localStorage.getItem( 'favoritos') ));
+        var a = array.indexOf(String(argument) );
+        console.log('favoritos'+a);
+        //array.splice(1, a);
+        delete array[ a ];
+        console.log(array);
+        localStorage.setItem('favoritos', JSON.stringify(array));
+
+        console.log('-----------------------------------------------------------------------------------------------------------');
+
+        //var index = array.indexOf(argument);
+        //console.log( array.indexOf(argument, 0) );
+        //alert(index);
+
+
+
+        /*for (var i=0; i<array.length; i++) { 
+          console.log(i);
+          console.log('array[i]'+array[i]);
+        
+          if(typeof array[i] === argument) {
+              // does not exist
+              console.log('-1-'+i);
+          }
+          else {
+              console.log('-2-'+i);
+              array.splice(i, 1);
+              // does exist
+              localStorage.setItem('favoritos', JSON.stringify(array));
+          }
+
+        }*/
+
+        
+        /*var array = JSON.parse(localStorage.getItem( 'favoritos') );
         var index = array.indexOf(argument);
         if (index > -1) {
 
+          console.log('-1-'+index);
         }else{
+          console.log('-2-'+index);
             array.splice(1, JSON.stringify(index));
-              console.log('array'+array);            
+            //console.log('array'+array);            
             localStorage.setItem('favoritos', JSON.stringify(array));
-        }
+        }*/
+
+        localStorage.setItem('favoritos', JSON.stringify(array));
 
     }else{
-
+        
         $('.playa-'+argument+' i').addClass('activo');
         rate(argument);
     }
-  
+
+
+    misPlayas();
+    cargoFavoritos();
 }
 
   function sizeWindows(){
@@ -227,7 +248,7 @@ function toggle_visibility(argument) {
   /*detect*/
 
   function getPlayas() {
-    console.log('getPlayas');
+    //console.log('getPlayas');
     $('#busqueda .list-block').append('<ul></ul>');
     $.ajax({
       url: direccion+'actions/593_getInfo.php',
@@ -273,7 +294,7 @@ function toggle_visibility(argument) {
   }
 
   function cargoActividades(){
-    console.log('cargoActividades');
+    //console.log('cargoActividades');
     
     $.ajax({
       url: direccion+'actions/593_getActividades_1.php',
@@ -299,7 +320,7 @@ function toggle_visibility(argument) {
       },
       complete : function(data){
         
-        console.log(data);
+        //console.log(data);
       },
       error : function(error){     
           console.log(error);
@@ -347,7 +368,7 @@ function playasOFFLine(){
               
                       
              beaches.push(valueToPush);
-             console.log(beaches);
+             //console.log(beaches);
         }
 
         if(_playas[playa].foto){
@@ -366,7 +387,7 @@ function playasOFFLine(){
                     $('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
                   
                   }else{
-                    console.log('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades');
+                    //console.log('#playas .contenido .playa-'+_actividades[actividad].playa+' .mActividades');
                     $('#playas .contenido .playa-'+_actividades[actividad].playa+' .mServicios').append('<div class="item item-actividades"><i class="fa '+  _actividades[actividad].icono  +'"></i></div>');
                   
                   }
@@ -468,7 +489,7 @@ function cargoDetalle(argument){
           $('#infoPlayas .contenido .mActividades').append('<div class="item item-actividades"><i class="fa icon-hospital"></i></div>');
           $('#infoPlayas .contenido .mActividades').append('<div class="item item-actividades"><i class="fa icon-chiringo"></i></div>');
           $('#infoPlayas .contenido .mActividades').append('<div class="item item-actividades"><i class="fa icon-tiendas"></i></div>');
-          console.log(_playas[playa].id_playa);
+          //console.log(_playas[playa].id_playa);
           $('#infoPlayas .contenido .mServicios').append('<div class="item item-actividades"><i class="fa icon-Kitesurf"></i></div>');
           $('#infoPlayas .contenido .mServicios').append('<div class="item item-actividades"><i class="fa icon-avistamiento-aves"></i></div>');
           $('#infoPlayas .contenido .mServicios').append('<div class="item item-actividades"><i class="fa icon-cabalgatas"></i></div>');
@@ -518,6 +539,7 @@ function guardoDatos(){
 /*********************************************************************************************/
 /*********************************************************************************************/
 
+  /*
     $("#chooseFile").click(function(e){
       e.preventDefault();
       $("input[type=file]").trigger("click");
@@ -546,8 +568,8 @@ function guardoDatos(){
       }
       $info.listview("refresh");*/
 
-    });
-
+  /*  });*/
+/*
  function displayAsImage3(file, containerid) {
     if (typeof FileReader !== "undefined") {
       var container = document.getElementById(containerid),
@@ -560,13 +582,82 @@ function guardoDatos(){
         return function (evt) {
           theImg.src = evt.target.result;
           localStorage.setItem("_imagenPerfil", evt.target.result);
-          console.log(evt.target.result);
+          //console.log(evt.target.result);
         };
       }(img));
       reader.readAsDataURL(file);
     }
+  }*/
+
+  function isUploadSupported() {
+      if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {
+          return false;
+      }
+      var elem = document.createElement('input');
+      elem.type = 'file';
+      return !elem.disabled;
+  };
+
+  function readFile(file) {
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+      processFile(reader.result, file.type);
+    }
+
+    reader.onerror = function () {
+      alert('There was an error reading the file!');
+    }
+
+    reader.readAsDataURL(file);
   }
 
+  function processFile(dataURL, fileType) {
+    var maxWidth = 800;
+    var maxHeight = 800;
+
+    var image = new Image();
+    image.src = dataURL;
+
+    image.onload = function () {
+      var width = image.width;
+      var height = image.height;
+      var shouldResize = (width > maxWidth) || (height > maxHeight);
+
+      if (!shouldResize) {
+        sendFile(dataURL);
+        return;
+      }
+
+      var newWidth;
+      var newHeight;
+
+      if (width > height) {
+        newHeight = height * (maxWidth / width);
+        newWidth = maxWidth;
+      } else {
+        newWidth = width * (maxHeight / height);
+        newHeight = maxHeight;
+      }
+
+      var canvas = document.createElement('canvas');
+
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+
+      var context = canvas.getContext('2d');
+
+      context.drawImage(this, 0, 0, newWidth, newHeight);
+
+      dataURL = canvas.toDataURL(fileType);
+
+      sendFile(dataURL);
+    };
+
+    image.onerror = function () {
+      alert('There was an error processing your file!');
+    };
+  }
 
 // Usage
 
@@ -607,14 +698,14 @@ function cargoMapa(argument1, argument2){
           map: map,
           icon: image
         });
-      
+      $('#map').css('height', screen.height);
     }
 
 }
 
 
 function misPlayas(){
-  console.log('misPlayas');
+  //console.log('misPlayas');
   $('#misplayas .contenido').empty();
   var favRate = JSON.parse(localStorage.getItem( 'favoritos') );
     //favRate = favRate.shift();
