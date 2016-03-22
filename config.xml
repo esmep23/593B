@@ -18,6 +18,27 @@
        <param name="domain" value="http://debug.phonegap.com"/>
        <param name="key" value="willoughby"/>
     </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.FileUtils" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.FileTransfer" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.CameraLauncher" />
+    </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="File">
+        <param name="ios-package" value="CDVFile" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="ios-package" value="CDVFileTransfer" />
+    </feature>
+
+    
+
 
 
     <preference name="phonegap-version" value="3.1.0" />
@@ -26,6 +47,9 @@
     <preference name="fullscreen"       value="false" />
     <preference name="webviewbounce"    value="false" />
     <preference name="SplashScreenDelay" value="10000" /> 
+    
+    
+
 
     <icon src="icon/android/icon-36-ldpi.png" gap:platform="android" gap:density="ldpi" />
     <icon src="icon/android/icon-48-mdpi.png" gap:platform="android" gap:density="mdpi" />
