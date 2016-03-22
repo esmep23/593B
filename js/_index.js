@@ -524,6 +524,7 @@ function guardoDatos(){
 
  
     $("#chooseFile").click(function(e){
+      alert(1);
       e.preventDefault();
       $("input[type=file]").trigger("click");
     });
@@ -535,7 +536,7 @@ function guardoDatos(){
       $(".takePick #info").css('display','none');
       displayAsImage3(file, "preview");
       
-      $info = $(".takePick #info");
+      /*$info = $(".takePick #info");
       $info.empty();
       if (file && file.name) {
         $info.append("<li>name:<span>" + file.name + "</span></li>");
@@ -549,7 +550,7 @@ function guardoDatos(){
       if (file && file.lastModifiedDate) {
         $info.append("<li>lastModifiedDate:<span>" + file.lastModifiedDate + " bytes</span></li>");
       }
-      $info.listview("refresh");
+      $info.listview("refresh");*/
 
     });
 
