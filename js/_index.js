@@ -93,7 +93,7 @@ $( document ).ready(function() {
   }
 */
 function toggle_visibility(argument) {
-    alert(argument);
+    //alert(argument);
     var e = document.getElementById('.playa-'+argument+' i');
     
     if($('.playa-'+argument+' i').hasClass('activo') ){
@@ -102,12 +102,9 @@ function toggle_visibility(argument) {
 
         //var array = JSON.parse(localStorage.getItem( 'favoritos') );
         var array = JSON.parse(localStorage.getItem( 'favoritos') );
-        console.log(JSON.parse(localStorage.getItem( 'favoritos') ));
         var a = array.indexOf(String(argument) );
-        console.log('favoritos'+a);
         //array.splice(1, a);
         delete array[ a ];
-        console.log(array);
         localStorage.setItem('favoritos', JSON.stringify(array));
 
         console.log('-----------------------------------------------------------------------------------------------------------');
@@ -153,12 +150,89 @@ function toggle_visibility(argument) {
     }else{
         
         $('.playa-'+argument+' i').addClass('activo');
+
         rate(argument);
     }
 
 
     misPlayas();
     cargoFavoritos();
+}
+
+function toggle_visibility_inside(argument) {
+    //alert(argument);
+    var e = document.getElementById('#infoPlayas .contenido article .rated .stars i');
+    
+    
+    if($('#infoPlayas .contenido article .rated .stars i').hasClass('activo') ){
+        
+        $('#infoPlayas .contenido article .rated .stars i').removeClass('activo');
+
+        //var array = JSON.parse(localStorage.getItem( 'favoritos') );
+        var array = JSON.parse(localStorage.getItem( 'favoritos') );
+        var a = array.indexOf(String(argument) );
+        //array.splice(1, a);
+        delete array[ a ];
+        localStorage.setItem('favoritos', JSON.stringify(array));
+
+        console.log('-----------------------------------------------------------------------------------------------------------');
+
+        //var index = array.indexOf(argument);
+        //console.log( array.indexOf(argument, 0) );
+        //alert(index);
+
+
+
+        /*for (var i=0; i<array.length; i++) { 
+          console.log(i);
+          console.log('array[i]'+array[i]);
+        
+          if(typeof array[i] === argument) {
+              // does not exist
+              console.log('-1-'+i);
+          }
+          else {
+              console.log('-2-'+i);
+              array.splice(i, 1);
+              // does exist
+              localStorage.setItem('favoritos', JSON.stringify(array));
+          }
+
+        }*/
+
+        
+        /*var array = JSON.parse(localStorage.getItem( 'favoritos') );
+        var index = array.indexOf(argument);
+        if (index > -1) {
+
+          console.log('-1-'+index);
+        }else{
+          console.log('-2-'+index);
+            array.splice(1, JSON.stringify(index));
+            //console.log('array'+array);            
+            localStorage.setItem('favoritos', JSON.stringify(array));
+        }*/
+
+        localStorage.setItem('favoritos', JSON.stringify(array));
+        
+        
+         playasOFFLine();
+          misPlayas();
+
+    }else{
+        
+        $('#infoPlayas .contenido article .rated .stars i').addClass('activo');
+       
+        rate(argument);
+        
+         playasOFFLine();
+          misPlayas();
+        
+
+    }
+
+
+    
 }
 
   function sizeWindows(){
@@ -437,12 +511,12 @@ function cargoDetalle(argument){
         }
         if (presto == -1){
           //oldItems.push(argument);
-          $('#infoPlayas .rated').append('<div class="stars" onclick="toggle_visibility('+_playas[playa].id_playa+')"><i class="fa fa-star"></i></div>');
+          $('#infoPlayas .rated').append('<div class="stars" onclick="toggle_visibility_inside('+_playas[playa].id_playa+')"><i class="fa fa-star"></i></div>');
           //$('#infoPlayas .rated .stars').attr('onclick',);
           //$('#infoPlayas .rated .stars i').removeClass('activo');
         }else{
           //$('#infoPlayas .rated .stars i').addClass('activo');
-          $('#infoPlayas .rated').append('<div class="stars" onclick="toggle_visibility('+_playas[playa].id_playa+')"><i class="fa fa-star activo"></i></div>');
+          $('#infoPlayas .rated').append('<div class="stars" onclick="toggle_visibility_inside('+_playas[playa].id_playa+')"><i class="fa fa-star activo"></i></div>');
         }
 
                 for ( actividad in _actividades) {
