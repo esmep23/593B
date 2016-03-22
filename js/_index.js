@@ -522,7 +522,7 @@ function guardoDatos(){
 /*********************************************************************************************/
 /*********************************************************************************************/
 
-  /*
+ 
     $("#chooseFile").click(function(e){
       e.preventDefault();
       $("input[type=file]").trigger("click");
@@ -535,7 +535,7 @@ function guardoDatos(){
       $(".takePick #info").css('display','none');
       displayAsImage3(file, "preview");
       
-      /*$info = $(".takePick #info");
+      $info = $(".takePick #info");
       $info.empty();
       if (file && file.name) {
         $info.append("<li>name:<span>" + file.name + "</span></li>");
@@ -549,10 +549,10 @@ function guardoDatos(){
       if (file && file.lastModifiedDate) {
         $info.append("<li>lastModifiedDate:<span>" + file.lastModifiedDate + " bytes</span></li>");
       }
-      $info.listview("refresh");*/
+      $info.listview("refresh");
 
-  /*  });*/
-/*
+    });
+
  function displayAsImage3(file, containerid) {
     if (typeof FileReader !== "undefined") {
       var container = document.getElementById(containerid),
@@ -570,7 +570,7 @@ function guardoDatos(){
       }(img));
       reader.readAsDataURL(file);
     }
-  }*/
+  }
 
 
 // Usage
