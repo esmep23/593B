@@ -81,11 +81,12 @@ $( document ).ready(function() {
   //imagenes
   if (window.File && window.FileReader && window.FormData) {
         var $inputField = $('#file');
-
+        alert(1);
         $inputField.on('change', function (e) {
           var file = e.target.files[0];
 
           if (file) {
+            alert(2);
             if (/^image\//i.test(file.type)) {
               readFile(file);
             } else {
@@ -94,6 +95,7 @@ $( document ).ready(function() {
           }
         });
       } else {
+        alert(3);
         alert("File upload is not supported!");
       }
  
