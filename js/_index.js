@@ -524,7 +524,7 @@ function guardoDatos(){
 
  
     $("#chooseFile").click(function(e){
-      alert(1);
+      //alert(1);
       e.preventDefault();
       $("input[type=file]").trigger("click");
     });
