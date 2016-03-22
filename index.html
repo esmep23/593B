@@ -10,7 +10,6 @@
     
     <link rel="stylesheet" href="dist/css/framework7.ios.min.css">
     <script type="text/javascript" src="dist/js/framework7.min.js"></script>
-    <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/my-app.css">
     <link rel="stylesheet" href="css/icomoon.css">
@@ -150,14 +149,15 @@
                 <div class="row no-gutter">
                   <div class="col-50">
                     <div data-role="content">
-                      <div class="hiddenfile" style="display:none">
-                        <!--<input type="file"  data-clear-btn="false" name="image" id="image" accept="image/*" capture>-->
-                        <input id="file" type="file" accept="image/*">
+                      <!--<div class="hiddenfile" style="display:none">
+                        <input type="file"  data-clear-btn="false" name="image" id="image" accept="image/*" capture>
+                        
                         <canvas></canvas>
-                      </div>
+                      </div>-->
                     </div>
                     <div class="takePick">
-                      <button id="chooseFile"><i class="fa fa-camera-retro fa-lg"></i></button>
+                      <input id="file" type="file" accept="image/*">
+                      <!--<button id="chooseFile"><i class="fa fa-camera-retro fa-lg"></i></button>-->
                       <div id="preview"></div>
                       <ul id="info" data-role="listview" data-inset="true"></ul>
                     </div>
