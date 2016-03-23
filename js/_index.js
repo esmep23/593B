@@ -604,6 +604,7 @@ function guardoDatos(){
     });*/
 
     $("input[type=file]").change(function(){
+      alert(1);
       var file = $("input[type=file]")[0].files[0];            
       $("#preview").empty();
       //$("button#chooseFile").css('display','none');
