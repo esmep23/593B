@@ -590,7 +590,7 @@ function guardoDatos(){
         localStorage.setItem('token', obj);
       },
       error : function(error){     
-         alert('error');
+         console.log(error);
       }
 
     }); 
