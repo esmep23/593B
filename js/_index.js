@@ -560,11 +560,14 @@ function cargoDetalle(argument){
 }
 
 function guardoDatos(){
+
+  alert('guardoDatos');
   nick = $('#nick').val();
   email = $('#email').val();
   pais = $('#pais').val();
   anio = $('#anio').val();
-  
+  alert(nick+'-'+ email +'-'+ pais +'-'+ anio);
+  alert(localStorage.getItem( '_imagenPerfil'));
   var datos ={
       'nick': nick,
       'email': email,
@@ -579,7 +582,7 @@ function guardoDatos(){
       dataType: "json",
       data: datos,
       success: function(response){  
-        //alert(response); 
+        alert(response); 
         mainView.router.load({pageName: 'playas', animatePages: false});
     
         var obj = response;
@@ -587,7 +590,7 @@ function guardoDatos(){
         localStorage.setItem('token', obj);
       },
       error : function(error){     
-          //alert(error);
+         alert('error');
       }
 
     }); 
