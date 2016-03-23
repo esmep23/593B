@@ -560,15 +560,11 @@ function cargoDetalle(argument){
 }
 
 function guardoDatos(){
-
-  alert('guardoDatos');
   nick = $('#nick').val();
   email = $('#email').val();
   pais = $('#pais').val();
   anio = $('#anio').val();
-  alert(nick+'-'+ email +'-'+ pais +'-'+ anio);
-
-  alert(typeof localStorage.getItem( '_imagenPerfil'));
+  
   var datos ={
       'nick': nick,
       'email': email,
@@ -580,9 +576,10 @@ function guardoDatos(){
       url: direccion+'actions/guardoRegistro.php',
       type: "POST",
       cache: true,
+      dataType: "json",
       data: datos,
       success: function(response){  
-        alert(response); 
+        //alert(response); 
         mainView.router.load({pageName: 'playas', animatePages: false});
     
         var obj = response;
@@ -590,7 +587,7 @@ function guardoDatos(){
         localStorage.setItem('token', obj);
       },
       error : function(error){     
-         console.log(error);
+          //alert(error);
       }
 
     }); 
@@ -607,7 +604,6 @@ function guardoDatos(){
     });*/
 
     $("input[type=file]").change(function(){
-      alert(1);
       var file = $("input[type=file]")[0].files[0];            
       $("#preview").empty();
       //$("button#chooseFile").css('display','none');
