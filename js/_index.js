@@ -597,17 +597,18 @@ function guardoDatos(){
 /*********************************************************************************************/
 
  
-    $("#chooseFile").click(function(e){
+    /*$("#chooseFile").click(function(e){
       //alert(1);
       e.preventDefault();
       $("input[type=file]").trigger("click");
-    });
+    });*/
 
     $("input[type=file]").change(function(){
       var file = $("input[type=file]")[0].files[0];            
       $("#preview").empty();
-      $("button#chooseFile").css('display','none');
-      $(".takePick #info").css('display','none');
+      //$("button#chooseFile").css('display','none');
+      $(".takePick input").css('display','none');
+      $(".takePick").css('background','none');
       displayAsImage3(file, "preview");
       
       /*$info = $(".takePick #info");
