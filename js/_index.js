@@ -8,6 +8,8 @@ var map;
 var onSearch = false; //toggle
 var value = localStorage.getItem('token');
 var beaches = new Array();
+var lon;
+var lat;
 
 var beaches = new Array();
 
@@ -49,7 +51,7 @@ $( document ).ready(function() {
 
   myApp.onPageInit('mapa', function (page) {
     $('#map').css('width','100%');
-    $('#map').css('height', screen.height-(screen.height/2)-80 );
+    $('#map').css('height', screen.height -250);
   });
 
  
@@ -215,9 +217,7 @@ function toggle_visibility_inside(argument) {
 
         localStorage.setItem('favoritos', JSON.stringify(array));
         
-        
-         playasOFFLine();
-          misPlayas();
+
 
     }else{
         
@@ -225,13 +225,13 @@ function toggle_visibility_inside(argument) {
        
         rate(argument);
         
-         playasOFFLine();
-          misPlayas();
+         
         
 
     }
 
-
+      playasOFFLine();
+      misPlayas();
     
 }
 
@@ -662,8 +662,77 @@ function cargoMapa(argument1, argument2){
   //$('#mapa2 .contenido #mapa').empty();
   //$('#mapa2 .contenido #mapa').append('<iframe src = "https://maps.google.com/maps?q='+argument1+','+argument2+'&hl=es;z=8&amp;output=embed" style="height: 500px; border: 0"></iframe>');
 
+     var content = document.getElementById("geolocation-test");
 
-    $('#map').empty();
+      if (navigator.geolocation)
+      {
+        navigator.geolocation.getCurrentPosition(function(objPosition)
+        {
+          lon = objPosition.coords.longitude;
+          lat = objPosition.coords.latitude;
+
+          console.log(lat +', '+lon);
+          console.log(parseFloat(argument1)+', '+parseFloat(argument2));
+
+
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            var directionsService = new google.maps.DirectionsService();
+          
+          var request = {
+               origin: lat +', '+lon,
+               destination: parseFloat(argument1)+', '+parseFloat(argument2),
+               travelMode: google.maps.DirectionsTravelMode["DRIVING"],
+               unitSystem: google.maps.DirectionsUnitSystem["METRIC"],
+               provideRouteAlternatives: true
+           };
+
+           var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 12,
+              center: {lat: parseFloat(argument1), lng:  parseFloat(argument2)}
+            });
+
+           directionsService.route(request, function(response, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                  directionsDisplay.setMap(map);
+                  directionsDisplay.setPanel($("#map_canvas").get(0));
+                  directionsDisplay.setDirections(response);
+              } else {
+                  alert("No existen rutas entre ambos puntos");
+              }
+          });
+          
+
+          //$('#nameMapa').append("<p><strong>Latitud:</strong> " + lat + "</p><p><strong>Longitud:</strong> " + lon + "</p>");
+
+        }, function(objPositionError)
+        {
+          switch (objPositionError.code)
+          {
+            case objPositionError.PERMISSION_DENIED:
+              content.innerHTML = "No se ha permitido el acceso a la posición del usuario.";
+            break;
+            case objPositionError.POSITION_UNAVAILABLE:
+              content.innerHTML = "No se ha podido acceder a la información de su posición.";
+            break;
+            case objPositionError.TIMEOUT:
+              content.innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+            break;
+            default:
+              content.innerHTML = "Error desconocido.";
+          }
+        }, {
+          maximumAge: 75000,
+          timeout: 15000
+        });
+      }
+      else
+      {
+        content.innerHTML = "Su navegador no soporta la API de geolocalización.";
+      }
+
+      
+      
+    /*$('#map').empty();
     initMap();
 
     function initMap() {
@@ -674,6 +743,7 @@ function cargoMapa(argument1, argument2){
 
         setMarkers(map);
      }
+
 
     function setMarkers(map) {
       var image = {
@@ -688,7 +758,7 @@ function cargoMapa(argument1, argument2){
           icon: image
         });
       $('#map').css('height', screen.height);
-    }
+    }*/
 
 }
 
