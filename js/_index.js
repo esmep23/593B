@@ -580,7 +580,6 @@ function guardoDatos(){
       url: direccion+'actions/guardoRegistro.php',
       type: "POST",
       cache: true,
-      dataType: "json",
       data: datos,
       success: function(response){  
         alert(response); 
