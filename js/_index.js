@@ -701,6 +701,13 @@ function cargoMapa(argument1, argument2){
                   alert("No existen rutas entre ambos puntos");
               }
           });
+
+           var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) )
+            {
+              $('#map').css('height',screen.height);
+            }
           
 
           //$('#nameMapa').append("<p><strong>Latitud:</strong> " + lat + "</p><p><strong>Longitud:</strong> " + lon + "</p>");
