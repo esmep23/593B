@@ -111,7 +111,41 @@ function toggle_visibility(argument) {
 
         console.log('-----------------------------------------------------------------------------------------------------------');
 
-     
+        //var index = array.indexOf(argument);
+        //console.log( array.indexOf(argument, 0) );
+        //alert(index);
+
+
+
+        /*for (var i=0; i<array.length; i++) { 
+          console.log(i);
+          console.log('array[i]'+array[i]);
+        
+          if(typeof array[i] === argument) {
+              // does not exist
+              console.log('-1-'+i);
+          }
+          else {
+              console.log('-2-'+i);
+              array.splice(i, 1);
+              // does exist
+              localStorage.setItem('favoritos', JSON.stringify(array));
+          }
+
+        }*/
+
+        
+        /*var array = JSON.parse(localStorage.getItem( 'favoritos') );
+        var index = array.indexOf(argument);
+        if (index > -1) {
+
+          console.log('-1-'+index);
+        }else{
+          console.log('-2-'+index);
+            array.splice(1, JSON.stringify(index));
+            //console.log('array'+array);            
+            localStorage.setItem('favoritos', JSON.stringify(array));
+        }*/
 
         localStorage.setItem('favoritos', JSON.stringify(array));
 
@@ -145,7 +179,41 @@ function toggle_visibility_inside(argument) {
 
         console.log('-----------------------------------------------------------------------------------------------------------');
 
-       
+        //var index = array.indexOf(argument);
+        //console.log( array.indexOf(argument, 0) );
+        //alert(index);
+
+
+
+        /*for (var i=0; i<array.length; i++) { 
+          console.log(i);
+          console.log('array[i]'+array[i]);
+        
+          if(typeof array[i] === argument) {
+              // does not exist
+              console.log('-1-'+i);
+          }
+          else {
+              console.log('-2-'+i);
+              array.splice(i, 1);
+              // does exist
+              localStorage.setItem('favoritos', JSON.stringify(array));
+          }
+
+        }*/
+
+        
+        /*var array = JSON.parse(localStorage.getItem( 'favoritos') );
+        var index = array.indexOf(argument);
+        if (index > -1) {
+
+          console.log('-1-'+index);
+        }else{
+          console.log('-2-'+index);
+            array.splice(1, JSON.stringify(index));
+            //console.log('array'+array);            
+            localStorage.setItem('favoritos', JSON.stringify(array));
+        }*/
 
         localStorage.setItem('favoritos', JSON.stringify(array));
         
@@ -529,6 +597,11 @@ function guardoDatos(){
 /*********************************************************************************************/
 
  
+    /*$("#chooseFile").click(function(e){
+      //alert(1);
+      e.preventDefault();
+      $("input[type=file]").trigger("click");
+    });*/
 
     $("input[type=file]").change(function(){
       var file = $("input[type=file]")[0].files[0];            
@@ -538,7 +611,21 @@ function guardoDatos(){
       $(".takePick").css('background','none');
       displayAsImage3(file, "preview");
       
-
+      /*$info = $(".takePick #info");
+      $info.empty();
+      if (file && file.name) {
+        $info.append("<li>name:<span>" + file.name + "</span></li>");
+      }
+      if (file && file.type) {
+        $info.append("<li>size:<span>" + file.type + " bytes</span></li>");
+      }
+      if (file && file.size) {
+        $info.append("<li>size:<span>" + file.size + " bytes</span></li>");
+      }
+      if (file && file.lastModifiedDate) {
+        $info.append("<li>lastModifiedDate:<span>" + file.lastModifiedDate + " bytes</span></li>");
+      }
+      $info.listview("refresh");*/
 
     });
 
@@ -573,6 +660,8 @@ function cargoMapa(argument1, argument2){
   //alert(argument1 +' - '+argument2);
   console.log(argument1+ '-' +argument2);
   mainView.router.load({pageName: 'mapa'});
+  //$('#mapa2 .contenido #mapa').empty();
+  //$('#mapa2 .contenido #mapa').append('<iframe src = "https://maps.google.com/maps?q='+argument1+','+argument2+'&hl=es;z=8&amp;output=embed" style="height: 500px; border: 0"></iframe>');
 
      var content = document.getElementById("geolocation-test");
 
@@ -599,7 +688,8 @@ function cargoMapa(argument1, argument2){
            };
 
            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 12
+              zoom: 12,
+              center: {lat: parseFloat(argument1), lng:  parseFloat(argument2)}
             });
 
            directionsService.route(request, function(response, status) {
@@ -620,7 +710,8 @@ function cargoMapa(argument1, argument2){
             }
           
 
-        
+          //$('#nameMapa').append("<p><strong>Latitud:</strong> " + lat + "</p><p><strong>Longitud:</strong> " + lon + "</p>");
+
         }, function(objPositionError)
         {
           switch (objPositionError.code)
@@ -649,24 +740,58 @@ function cargoMapa(argument1, argument2){
 
       
       
-    
+    /*$('#map').empty();
+    initMap();
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: parseFloat(argument1), lng:  parseFloat(argument2)}
+        });
+
+        setMarkers(map);
+     }
+
+
+    function setMarkers(map) {
+      var image = {
+        url: 'https://pocket.ec/dev/beach_593/point.png',
+        size: new google.maps.Size(30, 30),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(0, 30)
+      };
+        var marker = new google.maps.Marker({
+          position: {lat: parseFloat(argument1), lng: parseFloat(argument2)},
+          map: map,
+          icon: image
+        });
+      $('#map').css('height', screen.height);
+    }*/
 
 }
 
 
 function misPlayas(){
+  //console.log('misPlayas');
   $('#misplayas .contenido').empty();
   var favRate = JSON.parse(localStorage.getItem( 'favoritos') );
+    //favRate = favRate.shift();
+    //console.log('favRate - '+ favRate.length);
    for (var x=0; x<=favRate.length-1; x++)  {  
       $('.playa-'+favRate[x]+' i').addClass('activo');
 
+      //console.log('_playas - '+ _playas.length);
       for (var p=0; p<=_playas.length-1; p++)  { 
+       // _playas[p].indexOf(favRate[x]);
+       //console.log(_playas[p].id_playa +' - ' + favRate[x]);
          if(_playas[p].id_playa == favRate[x]){
+            //console.log('OK ----------------------'+(p+1));
             if(_playas[p].foto){
               $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].slug+'</figcaption><img src="'+_playas[p].foto+'" class="fotodestino" /></figure></div></div>');
             }else{
               $('#misplayas .contenido').append('<div class="col-50 playa playa-'+_playas[p].id_playa+' " ><div onclick="cargoDetalle('+_playas[p].id_playa+');"><figcaption>'+_playas[p].slug+'</figcaption><img src="img/comodin.png" class="fotodestino" /></figure></div></div>');
             }
+            /* ---- **/  
          }
         
       }
