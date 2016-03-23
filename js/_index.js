@@ -567,7 +567,8 @@ function guardoDatos(){
   pais = $('#pais').val();
   anio = $('#anio').val();
   alert(nick+'-'+ email +'-'+ pais +'-'+ anio);
-  alert(localStorage.getItem( '_imagenPerfil'));
+
+  alert(typeof localStorage.getItem( '_imagenPerfil'));
   var datos ={
       'nick': nick,
       'email': email,
